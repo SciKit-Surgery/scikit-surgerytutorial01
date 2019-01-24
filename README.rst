@@ -27,6 +27,17 @@ SNAPPYTutorial01 is part of the `SNAPPY`_ software project, developed at the `We
 
 SNAPPYTutorial01 supports Python 2.7 and Python 3.6.
 
+Purpose
+-------
+The tutorial guides the user in producing a simple augmented reality application using
+some SNAPPY libraries. The tutorial is intended to show how SNAPPY can be used to 
+quickly develop applications that include:
+  data acquisition
+  data processing
+  data display
+
+
+
 Installing
 ----------
 
