@@ -1,45 +1,46 @@
 #! /usr/bin/python3.6
 # coding=utf-8
 import sys
-import numpy as np
-from PySide2.QtWidgets import QWidget, QApplication
+from PySide2.QtWidgets import QApplication
 from sksurgeryvtk.widgets.OverlayBaseApp import OverlayBaseApp
 
-class ArucoApp(OverlayBaseApp):
-
-    def __init__(self, video_source):
-        super().__init__(video_source)
+class OverlayApp(OverlayBaseApp):
+    """Inherits from OverlayBaseApp, and adds a minimal
+    implementation of update. """
 
     def update(self):
-        """Update the background render with a new frame and
-        scan for aruco tags"""
-        #pylint: disable=attribute-defined-outside-init
-
+        """Update the background renderer with a new frame,
+        move the model and render"""
         ret, self.img = self.video_source.read()
+
+        #add a method to move the rendered models
+        self._move_model()
+
         self.vtk_overlay_window.set_video_image(self.img)
         self.vtk_overlay_window._RenderWindow.Render()
-            
-        #move the actors onto the tag.
+
+    def _move_model(self):
+        """Internal method to move the rendered models in
+        some interesting way"""
+        #Iterate through the rendered models
         for actor in self.vtk_overlay_window.get_foreground_renderer().GetActors():
+            #get the current orientation
             orientation=actor.GetOrientation()
-            orientation = [orientation[0] , orientation[1], orientation[2] + 0.5]
+            #increase the rotation around the z-axis by 1.0 degrees
+            orientation = [orientation[0] , orientation[1], orientation[2] + 1.0]
+            #add update the model's orientation
             actor.SetOrientation(orientation)
-            
-           # tvecs[0][0][0] = -tvecs[0][0][0]
-           # actor.SetPosition(camera.GetPosition() - tvecs[0][0])
-           # print (actor.GetPosition())
 
 
 app = QApplication([])
 
-#you can set the video source, 0 for the first webcam you find.
 video_source=0
-viewer = ArucoApp(video_source)
+viewer = OverlayApp(video_source)
 
-model_dir = 'models'
+model_dir = '../models'
 viewer.add_vtk_models_from_dir(model_dir)
 
 viewer.start()
 
 sys.exit(app.exec_())
-    
+

@@ -1,76 +1,99 @@
 #! /usr/bin/python3.6
 # coding=utf-8
-import cv2
 import sys
-import numpy as np
-from PySide2.QtWidgets import QWidget, QApplication
+#add an import for opencv, so we can use its aruco functions
+import cv2
+#add an import for numpy, to manipulate arrays
+import numpy
+from PySide2.QtWidgets import QApplication
 from sksurgeryvtk.widgets.OverlayBaseApp import OverlayBaseApp
 
-class ArucoApp(OverlayBaseApp):
+class OverlayApp(OverlayBaseApp):
+    """Inherits from OverlayBaseApp, and adds methods to
+    detect aruco tags and move the model to follow."""
 
     def __init__(self, video_source):
+        """overrides the default constructor to add some member variables
+        which wee need for the aruco tag detection"""
+
+        #the aruco tag dictionary to use. DICT_4X4_50 will work with the tag in
+        #../tags/aruco_4by4_0.pdf
+        self.dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+        # The size of the aruco tag in mm
+        self.marker_size = 50
+
+        #we'll use opencv to estimate the pose of the visible aruco tags.
+        #for that we need a calibrated camera. For now let's just use a
+        #a hard coded estimate. Maybe you could improve on this.
+        self.camera_projection_matrix = numpy.array([[560.0 , 0.0 , 320.0],
+                                                      [0.0, 560.0 , 240.0],
+                                                      [0.0, 0.0, 1.0]])
+        self.camera_distortion = numpy.zeros((1,4),numpy.float32)
+
+        #and call the constructor for the base class
         super().__init__(video_source)
 
     def update(self):
         """Update the background render with a new frame and
         scan for aruco tags"""
-        #pylint: disable=attribute-defined-outside-init
 
         ret, self.img = self.video_source.read()
+        self._aruco_detect_and_follow()
+
+        #Without the next line the model does not show as the clipping range
+        #does not change to accommodate model motion. Uncomment it to
+        #see what happens.
+        self.vtk_overlay_window.set_camera_state({"ClippingRange": [10,800]})
         self.vtk_overlay_window.set_video_image(self.img)
-        self.aruco_detect()
         self.vtk_overlay_window._RenderWindow.Render()
 
-    def aruco_detect(self):
-        """Detect any aruco tags present."""
-        #hard code the tag variety for simplicity
-        dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
-        #detect
-        marker_corners, marker_ids, _ = cv2.aruco.detectMarkers(self.img, dictionary)
-        #hard code the camera calibration for now. This should really load any camera 
-        #parameters from the class
-        camera_matrix = np.zeros((3,3), np.float32)
-        camera_matrix[0][0] = 560.0
-        camera_matrix[1][1] = 560.0
-        camera_matrix[0][2] = 320.0
-        camera_matrix[1][2] = 240.0
-        camera_matrix[2][2] = 1.0
-        distortion = np.zeros((1,4),np.float32)
-        marker_size = 50 ## mm same units as camera calibration
+    def _aruco_detect_and_follow(self):
+        """Detect any aruco tags present. Based on;
+        https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
+        """
+        #detect any markers
+        marker_corners, marker_ids, _ = cv2.aruco.detectMarkers(self.img, self.dictionary)
 
         if len(marker_corners) > 0:
-            rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(marker_corners, marker_size, camera_matrix, distortion)
-            #do some drawing
-            cv2.aruco.drawDetectedMarkers(self.img, marker_corners)# marker_ids)
-            cv2.aruco.drawAxis(self.img, camera_matrix, distortion, rvecs, tvecs, 15.0)
+            #if any markers found, try and determine their pose
+            rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(marker_corners,
+                    self.marker_size, self.camera_projection_matrix, self.camera_distortion)
 
-            camera = self.vtk_overlay_window.get_foreground_camera()
-            self.vtk_overlay_window.set_camera_state({"ClippingRange": [10,400]})
-            #print (camera.GetPosition())
-            
-            #move the actors onto the tag.
-            for actor in self.vtk_overlay_window.get_foreground_renderer().GetActors():
-                tvecs[0][0][0] = -tvecs[0][0][0]
+            self._move_model(rvecs[0][0], tvecs[0][0])
 
-                actor.SetPosition(camera.GetPosition() - tvecs[0][0])
-                
-                #for orientation, opencv axes don't line up with VTK, and 
-                #rvecs are in radians, VTK in degrees
-                #rvecs[0][0] = 180 * rvecs[0][0]/3.14
-                #actor.SetOrientation( rvecs[0][0])
-                print (actor.GetPosition(), actor.GetOrientation())
+
+    def _move_model(self, rotation, translation):
+        """Internal method to move the rendered models in
+        some interesting way"""
+
+        #because the camera won't normally be at the origin,
+        #we need to find it and make movement relative to it
+        camera=self.vtk_overlay_window.get_foreground_camera()
+
+        #Iterate through the rendered models
+        for actor in self.vtk_overlay_window.get_foreground_renderer().GetActors():
+             #opencv and vtk seem to have different x-axis, flip the x-axis
+             translation[0] = -translation[0]
+
+             #set the position, relative to the camera
+             actor.SetPosition(camera.GetPosition() - translation)
+
+             #for orientation, opencv axes don't line up with VTK, and
+             #rvecs are in radians, VTK in degrees.
+             #uncomment the next two lines for some interesting results.
+             #rotation = 180 * rotation/3.14
+             #actor.SetOrientation( rotation)
 
 
 app = QApplication([])
 
-#you can set the video source, 0 for the first webcam you find.
 video_source=0
-viewer = ArucoApp(video_source)
+viewer = OverlayApp(video_source)
 
-model_dir = 'models'
+model_dir = '../models'
 viewer.add_vtk_models_from_dir(model_dir)
 
 viewer.start()
 
 sys.exit(app.exec_())
-    
+
