@@ -44,7 +44,8 @@ exclude_patterns = [
     'Thumbs.db',
     '.DS_Store',
     '_verion.py',
-    'versioneer.py'
+    'versioneer.py',
+    'snappytutorial01*'
 
 ]
 
