@@ -12,8 +12,8 @@ to provide video streaming, and finally a model renderer. The SNAPPY package
 `scikit-surgeryvtk`_ simplifies the process by integrating QT (`PySide2`_), 
 `OpenCV`_, and `VTK`_ into a simple to library.
 
-00 - Setup
-~~~~~~~~~~
+00 - Simple overlay application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Using your favourite text editor or Python development environment, 
 create a new file called vtkoverlay_app.py or similar. 
 
