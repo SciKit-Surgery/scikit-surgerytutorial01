@@ -8,25 +8,25 @@ Making a simple model overlay application
 
 Making an augmented reality application can be complicated. The developer
 requires an application framework to handle display, threading and user interface, something
-to provide video streaming, and finally a model renderer. The SNAPPY package 
-`scikit-surgeryvtk`_ simplifies the process by integrating QT (`PySide2`_), 
+to provide video streaming, and finally a model renderer. The SNAPPY package
+`scikit-surgeryvtk`_ simplifies the process by integrating QT (`PySide2`_),
 `OpenCV`_, and `VTK`_ into a simple to library.
 
 00 - Simple overlay application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Using your favourite text editor or Python development environment, 
-create a new file called vtkoverlay_app.py or similar. 
+Using your favourite text editor or Python development environment,
+create a new file called vtkoverlay_app.py or similar.
 
 Start with some import statements
 
-:: 
+::
 
   import sys
   from PySide2.QtWidgets import QApplication
   from sksurgeryvtk.widgets.OverlayBaseApp import OverlayBaseApp
 
 scikit-surgery provides an `OverlayBaseApp`_ module that creates a qtwidget showing
-a live stream from a video source, overlaid with a rendered surface model. 
+a live stream from a video source, overlaid with a rendered surface model.
 scikit-surgery leaves the update method unimplemented so that the user
 can implement their own version in an child class.
 
@@ -40,7 +40,7 @@ and implement a minimal update method
 ::
 
     def update(self):
-        """Update the background renderer with a new frame, 
+        """Update the background renderer with a new frame,
         and render"""
 
         #read a new image from the video source
@@ -52,10 +52,13 @@ and implement a minimal update method
         #and render
         self.vtk_overlay_window._RenderWindow.Render()
 
-Now we build the application itself. 
+Now we build the application itself.
 
 ::
-  
+
+  #first we create an application
+  app = QApplication([])
+
   #then an instance of OverlayApp. The video source
   #is set when we create the instance. This is an index
   #starting at 0. If you have more than one webcam, you can
@@ -77,16 +80,16 @@ Now we build the application itself.
 
 Now run the application with
 
-:: 
+::
 
   python vtkoverlay_app.py
 
 or similar. If successful you should see a live video stream overlaid with
-a rendered surface model. Congratulations. If not you can download a 
-`finished example`_ and compare. Play around with it, see what happens if 
+a rendered surface model. Congratulations. If not you can download a
+`finished example`_ and compare. Play around with it, see what happens if
 you delete some line or change part of the update method.
 
-Next we will add some code to the update loop to move the rendered model 
+Next we will add some code to the update loop to move the rendered model
 for each frame update.
 
 .. _`scikit-surgeryvtk`: https://pypi.org/project/scikit-surgeryvtk
