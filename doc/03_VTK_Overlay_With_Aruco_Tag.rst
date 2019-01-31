@@ -6,15 +6,15 @@
 Detecting a feature to control model motion
 ===============================================
 
-So far we haven't performed any data processing, which is a key 
-element of any surgical AR system. Typically we might get tracking 
+So far we haven't performed any data processing, which is a key
+element of any surgical AR system. Typically we might get tracking
 information from an external tracking system, for example using
-`scikit-surgerynditracker`_. However this isn't practical for a 
-tutorial, so let's just use the video feed itself. 
+`scikit-surgerynditracker`_. However this isn't practical for a
+tutorial, so let's just use the video feed itself.
 
 02 - Add a feature detector and follower
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Create a copy of vtkoverlay_with_movement_app.py and call it 
+Create a copy of vtkoverlay_with_movement_app.py and call it
 vtk_aruco_app.py or similar.
 
 Add an import statement for opencv
@@ -23,7 +23,7 @@ Add an import statement for opencv
 
   import cv2
 
-OpenCV provides numerous computer vision tools, and integrates seamlessly 
+OpenCV provides numerous computer vision tools, and integrates seamlessly
 with SNAPPY using numpy data structures, which we must also import
 
 ::
@@ -31,7 +31,7 @@ with SNAPPY using numpy data structures, which we must also import
   import numpy
 
 
-Now we need some member variables to use with the aruco tag detector. In our 
+Now we need some member variables to use with the aruco tag detector. In our
 OverlayApp we will create a new __init__ function to override the one in the base
 class and define the member variables we will need
 
@@ -46,7 +46,7 @@ class and define the member variables we will need
         self.marker_size = 50
 
         #we'll use opencv to estimate the pose of the visible aruco tags.
-        #for that we need a calibrated camera. For now let's just use a
+        #for that we need a calibrated camera. For now let's just use
         #a hard coded estimate. Maybe you could improve on this.
         self.camera_projection_matrix = numpy.array([[560.0 , 0.0 , 320.0],
                                                       [0.0, 560.0 , 240.0],
@@ -58,8 +58,9 @@ class and define the member variables we will need
 
 
 
-Edit the update method for the OverlayApp class, to call a new 
-method called _aruco_detect_and_follow.
+Edit the update method for the OverlayApp class, to call a new
+method called _aruco_detect_and_follow. Replace the call to method
+self._move_model() with self._aruco_detect_and_follow().
 
 .. code-block:: python
    :emphasize-lines: 4,5
@@ -73,7 +74,7 @@ method called _aruco_detect_and_follow.
         self.vtk_overlay_window.set_video_image(self.img)
         self.vtk_overlay_window._RenderWindow.Render()
 
-Then add a new method called _aruco_detect_and_follow to the class.  
+Then add a new method called _aruco_detect_and_follow to the class.
 The tag detection code is taken from the `OpenCV aruco tutorial`_.
 
 ::
@@ -86,18 +87,19 @@ The tag detection code is taken from the `OpenCV aruco tutorial`_.
             #if any markers found, estmate their pose
             rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(marker_corners,
                     self.marker_size, self.camera_projection_matrix, self.camera_distortion)
-            
+
             #and move the model to suit
             self._move_model(rvecs[0][0], tvecs[0][0])
 
 
-Then edit the _move_model method to take two position arguments.  
+Delete the _move_model method and replace it with the one
+below, which takes two position arguments.
 
 .. code-block:: python
 
   def _move_model(self, rotation, translation):
 
-        #because the camera won't normally be at the origin, 
+        #because the camera won't normally be at the origin,
         #we need to find it and make movement relative to it
         camera=self.vtk_overlay_window.get_foreground_camera()
 
@@ -111,7 +113,7 @@ Then edit the _move_model method to take two position arguments.
 
 Leave the rest of the file as is, and try running the application with
 
-:: 
+::
 
   python vtk_aruco_app.py
 
@@ -119,8 +121,8 @@ or similar. If successful you should see a live video stream overlaid with
 a rendered surface model. When you hold the printed aruco tag in front of the
 camera, the model should approximately follow it.
 
-You may notice that the model appears and disappears at certain distances from the 
-camera. This is because we haven't updated the renderer's clipping planes to 
+You may notice that the model appears and disappears at certain distances from the
+camera. This is because we haven't updated the renderer's clipping planes to
 match the new model position. This can be easily fixed by adding the following
 code to the update method
 
@@ -130,7 +132,7 @@ code to the update method
 
 Maybe you can do something more sophisticated.
 
-Also, you may notice that the model does not change orientation. You could add the following 
+Also, you may notice that the model does not change orientation. You could add the following
 to the _move_model method
 
 ::
@@ -138,19 +140,19 @@ to the _move_model method
   rotation = 180 * rotation/3.14
   actor.SetOrientation( rotation)
 
-You will see that a further rotation is required to get a sensible result. See if you can 
+You will see that a further rotation is required to get a sensible result. See if you can
 work it out.
 
-Lastly you will notice that the model doesn't precisely follow the tag. This may be 
-because we haven't calibrated the camera, we just took a guess, so the pose estimation 
-will be wrong. Also we have not set the camera parameters for the VTK renderer, so this 
-will not match the video view. 
+Lastly you will notice that the model doesn't precisely follow the tag. This may be
+because we haven't calibrated the camera, we just took a guess, so the pose estimation
+will be wrong. Also we have not set the camera parameters for the VTK renderer, so this
+will not match the video view.
 
-You can download a 
+You can download a
 `finished example`_ of this tutorial file.
 
-That completes this tutorial. Please get in touch with any feedback or issues. You can 
-use the issue tracker at the `Project homepage`_. 
+That completes this tutorial. Please get in touch with any feedback or issues. You can
+use the issue tracker at the `Project homepage`_.
 
 .. _`scikit-surgeryvtk`: https://pypi.org/project/scikit-surgeryvtk
 .. _`scikit-surgerynditracker`: https://pypi.org/project/scikit-surgerynditracker
