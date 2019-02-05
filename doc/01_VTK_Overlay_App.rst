@@ -40,17 +40,15 @@ and implement a minimal update method
 ::
 
     def update(self):
-        """Update the background renderer with a new frame,
-        and render"""
 
         #read a new image from the video source
-        ret, self.img = self.video_source.read()
+        _, image = self.video_source.read()
 
         #copy the image to the overlay window
-        self.vtk_overlay_window.set_video_image(self.img)
+        self.vtk_overlay_window.set_video_image(image)
 
         #and render
-        self.vtk_overlay_window._RenderWindow.Render()
+        self.vtk_overlay_window.Render()
 
 Now we build the application itself.
 
@@ -63,7 +61,7 @@ Now we build the application itself.
   #is set when we create the instance. This is an index
   #starting at 0. If you have more than one webcam, you can
   #try using different numbered sources
-  video_source=0
+  video_source = 0
   viewer = OverlayApp(video_source)
 
   #Set a model directory containing the models you wish
@@ -97,4 +95,4 @@ for each frame update.
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
 .. _`OverlayBaseApp` : https://scikit-surgeryvtk.readthedocs.io/en/latest/sksurgeryvtk.widgets.OverlayBaseApp.html#module-sksurgeryvtk.widgets.OverlayBaseApp
-.. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/00_vtkoverlay_app.py
+.. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtkoverlay_app.py
