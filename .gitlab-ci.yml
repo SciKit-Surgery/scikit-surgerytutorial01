@@ -5,8 +5,6 @@ variables:
 
 stages:
   - build
-  - installer
-  - test
   - deploy
 
 
@@ -20,68 +18,6 @@ build docs:
     paths:
     - doc/
     expire_in: 1 week
-
-
-build linux installer:
-  stage: build
-  script:
-    - tox -e installer
-  tags:
-    - shared-linux
-  artifacts:
-    paths:
-    - dist/
-    expire_in: 1 week
-
-
-build mac installer:
-  stage: build
-  script:
-    - tox -e installer
-  tags:
-    - shared-mac
-  artifacts:
-    paths:
-    - dist/
-    expire_in: 1 week
-
-
-build windows installer:
-  stage: build
-  script:
-    - tox -e installer
-  tags:
-    - shared-win
-  artifacts:
-    paths:
-    - dist/
-    expire_in: 1 week
-
-
-test Linux:
-  stage: test
-  script:
-      - tox
-  tags:
-    - shared-linux
-  coverage: '/^TOTAL.*\s+(\d+\%)$/'
-
-
-test macOS:
-  stage: test
-  script:
-      - tox
-  tags:
-    - shared-mac
-
-
-test Windows:
-  stage: test
-  script:
-      - tox
-  tags:
-    - shared-win
-
 
 deploy docs to staging:
   stage: deploy
@@ -113,32 +49,3 @@ deploy docs to production:
   dependencies:
     - build docs
 
-deploy pip to PyPI:
-
-  stage: deploy
-  when: manual
-  only:
-    - tags
-    
-  environment:
-    name: PyPI
-    url: https://pypi.python.org/pypi/SNAPPYTutorial01
-    
-  tags:
-    - pip-production
-    
-  artifacts:
-    paths:
-    - dist/
-    
-  script:
-    # Install packages required to build/publish
-    # remove any previous distribution files
-    - pip install wheel twine setuptools
-    - rm -rf dist
-
-    # bundle installer
-    - python setup.py bdist_wheel
-
-    # Upload to pypi
-    - twine upload --repository pypi dist/* --username $PYPI_USER --password $PYPI_PASS
