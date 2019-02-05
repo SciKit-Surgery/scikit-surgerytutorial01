@@ -37,25 +37,27 @@ class and define the member variables we will need
 
 ::
 
-  def __init__(self, video_source):
-
+   def __init__(self, image_source):
         #the aruco tag dictionary to use. DICT_4X4_50 will work with the tag in
-        #../tags/aruco_4by4_0.pdf
-        self.dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+        #../tags/tag_sheet_snappy01.pdf
+        self.dictionary = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
         # The size of the aruco tag in mm
         self.marker_size = 50
 
         #we'll use opencv to estimate the pose of the visible aruco tags.
-        #for that we need a calibrated camera. For now let's just use
+        #for that we need a calibrated camera. For now let's just use a
         #a hard coded estimate. Maybe you could improve on this.
-        self.camera_projection_matrix = numpy.array([[560.0 , 0.0 , 320.0],
-                                                      [0.0, 560.0 , 240.0],
-                                                      [0.0, 0.0, 1.0]])
-        self.camera_distortion = numpy.zeros((1,4),numpy.float32)
+        self.camera_projection_mat = numpy.array([[560.0, 0.0, 320.0],
+                                                  [0.0, 560.0, 240.0],
+                                                  [0.0, 0.0, 1.0]])
+        self.camera_distortion = numpy.zeros((1, 4), numpy.float32)
 
         #and call the constructor for the base class
-        super().__init__(video_source)
-
+        if sys.version_info > (3, 0):
+            super().__init__(image_source)
+        else:
+            #super doesn't work the same in py2.7
+            OverlayBaseApp.__init__(self, image_source)
 
 
 Edit the update method for the OverlayApp class, to call a new
@@ -66,12 +68,12 @@ self._move_model() with self._aruco_detect_and_follow().
    :emphasize-lines: 4,5
 
    def update(self):
-        ret, self.img = self.video_source.read()
+        _, image = self.video_source.read()
 
         #add a method to move the rendered models
         self._aruco_detect_and_follow()
 
-        self.vtk_overlay_window.set_video_image(self.img)
+        self.vtk_overlay_window.set_video_image(image)
         self.vtk_overlay_window._RenderWindow.Render()
 
 Then add a new method called _aruco_detect_and_follow to the class.
@@ -81,14 +83,16 @@ The tag detection code is taken from the `OpenCV aruco tutorial`_.
 
   def _aruco_detect_and_follow(self):
         #detect any markers
-        marker_corners, marker_ids, _ = cv2.aruco.detectMarkers(self.img, self.dictionary)
+        marker_corners, _, _ = aruco.detectMarkers(image, self.dictionary)
 
-        if len(marker_corners) > 0:
-            #if any markers found, estmate their pose
-            rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(marker_corners,
-                    self.marker_size, self.camera_projection_matrix, self.camera_distortion)
+        if marker_corners:
+            #if any markers found, try and determine their pose
+            rvecs, tvecs, _ = \
+                    aruco.estimatePoseSingleMarkers(marker_corners,
+                                                    self.marker_size,
+                                                    self.camera_projection_mat,
+                                                    self.camera_distortion)
 
-            #and move the model to suit
             self._move_model(rvecs[0][0], tvecs[0][0])
 
 
@@ -101,15 +105,16 @@ below, which takes two position arguments.
 
         #because the camera won't normally be at the origin,
         #we need to find it and make movement relative to it
-        camera=self.vtk_overlay_window.get_foreground_camera()
+        camera = self.vtk_overlay_window.get_foreground_camera()
 
         #Iterate through the rendered models
         for actor in self.vtk_overlay_window.get_foreground_renderer().GetActors():
-             #opencv and vtk seem to have different x-axis, flip the x-axis
-             translation[0] = -translation[0]
+            #opencv and vtk seem to have different x-axis, flip the x-axis
+            translation[0] = -translation[0]
 
-             #set the position, relative to the camera
-             actor.SetPosition(camera.GetPosition() - translation)
+            #set the position, relative to the camera
+            actor.SetPosition(camera.GetPosition() - translation)
+
 
 Leave the rest of the file as is, and try running the application with
 
@@ -118,7 +123,7 @@ Leave the rest of the file as is, and try running the application with
   python vtk_aruco_app.py
 
 or similar. If successful you should see a live video stream overlaid with
-a rendered surface model. When you hold the printed aruco tag in front of the
+a rendered surface model. When you hold the printed ArUco tag in front of the
 camera, the model should approximately follow it.
 
 You may notice that the model appears and disappears at certain distances from the
@@ -128,7 +133,7 @@ code to the update method
 
 ::
 
-  self.vtk_overlay_window.set_camera_state({"ClippingRange": [10,800]})
+  self.vtk_overlay_window.set_camera_state({"ClippingRange": [10, 800]})
 
 Maybe you can do something more sophisticated.
 
@@ -160,6 +165,6 @@ use the issue tracker at the `Project homepage`_.
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
 .. _`OverlayBaseApp` : https://scikit-surgeryvtk.readthedocs.io/en/latest/sksurgeryvtk.widgets.OverlayBaseApp.html#module-sksurgeryvtk.widgets.OverlayBaseApp
-.. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/02_vtk_aruco_app.py
+.. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtk_aruco_app.py
 .. _`OpenCV aruco tutorial` : https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
 .. _`Project homepage` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01

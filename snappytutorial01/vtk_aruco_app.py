@@ -83,7 +83,7 @@ class OverlayApp(OverlayBaseApp):
         #Iterate through the rendered models
         for actor in \
                 self.vtk_overlay_window.get_foreground_renderer().GetActors():
-             #opencv and vtk seem to have different x-axis, flip the x-axis
+            #opencv and vtk seem to have different x-axis, flip the x-axis
             translation[0] = -translation[0]
 
             #set the position, relative to the camera

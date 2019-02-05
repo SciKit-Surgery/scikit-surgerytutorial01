@@ -6,18 +6,18 @@
 Introduction
 ===============================================
 
-This is tutorial 01 for the SNAPPY software collection. SNAPPY aims to support users in 
-developing software applications for surgery. The aim of the tutorial is to 
-introduce the user to SNAPPY. After completing the tutorial the user will have; 
+This is tutorial 01 for the SNAPPY software collection. SNAPPY aims to support users in
+developing software applications for surgery. The aim of the tutorial is to
+introduce the user to SNAPPY. After completing the tutorial the user will have;
 
-- made a small augmented reality that shows a rendered surface model overlaid on a 
+- made a small augmented reality that shows a rendered surface model overlaid on a
   live video,
 - written an algorithm to move the rendered model,
-- written an algorithm to track an aruco tag in the live video and "attach" the rendered moel
+- written an algorithm to track an ArUco tag in the live video and "attach" the rendered model
   to the feature.
 
 The tutorial makes use of the SNAPPY library scikit-surgeryvtk. The tutorial has been tested with
-Python 3.6. It may also work with Python 2.7, though has not been tested.
+Python 3.6 on Linux, Windows, and Mac. and Python 2.7 on Linux.
 
 Installation
 ~~~~~~~~~~~~
