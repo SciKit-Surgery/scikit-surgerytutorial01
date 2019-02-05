@@ -42,16 +42,6 @@ To remain accessible to novice programmers the tutorial tries to avoid issues su
 parsing command line arguments, event loops and GUI design. 
 
 
-Installing
-----------
-
-You can pip install directly from the repository as follows:
-
-::
-
-    pip install git+https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
-
-
 Developing
 ----------
 
@@ -64,16 +54,6 @@ You can clone the repository using the following command:
 
     git clone https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
 
-
-Running the tests
-^^^^^^^^^^^^^^^^^
-
-You can run the unit tests by installing and running tox:
-
-::
-
-    pip install tox
-    tox
 
 Contributing
 ^^^^^^^^^^^^
