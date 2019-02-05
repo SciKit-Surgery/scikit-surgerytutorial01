@@ -17,21 +17,21 @@ tutorial, so let's just use the video feed itself.
 Create a copy of vtkoverlay_with_movement_app.py and call it
 vtk_aruco_app.py or similar.
 
-Add an import statement for opencv
+Add an import statement for the ArUco detectors in OpenCV
 
 ::
 
-  import cv2
+  import cv2.aruco as aruco
 
 OpenCV provides numerous computer vision tools, and integrates seamlessly
-with SNAPPY using numpy data structures, which we must also import
+with SNAPPY using NumPy data structures, which we must also import
 
 ::
 
   import numpy
 
 
-Now we need some member variables to use with the aruco tag detector. In our
+Now we need some member variables to use with the ArUco tag detector. In our
 OverlayApp we will create a new __init__ function to override the one in the base
 class and define the member variables we will need
 
@@ -77,7 +77,7 @@ self._move_model() with self._aruco_detect_and_follow().
         self.vtk_overlay_window._RenderWindow.Render()
 
 Then add a new method called _aruco_detect_and_follow to the class.
-The tag detection code is taken from the `OpenCV aruco tutorial`_.
+The tag detection code is taken from the `OpenCV ArUco tutorial`_.
 
 ::
 
@@ -87,11 +87,10 @@ The tag detection code is taken from the `OpenCV aruco tutorial`_.
 
         if marker_corners:
             #if any markers found, try and determine their pose
-            rvecs, tvecs, _ = \
-                    aruco.estimatePoseSingleMarkers(marker_corners,
-                                                    self.marker_size,
-                                                    self.camera_projection_mat,
-                                                    self.camera_distortion)
+            rvecs, tvecs, _ = aruco.estimatePoseSingleMarkers(marker_corners,
+                                                              self.marker_size,
+                                                              self.camera_projection_mat,
+                                                              self.camera_distortion)
 
             self._move_model(rvecs[0][0], tvecs[0][0])
 
@@ -166,5 +165,5 @@ use the issue tracker at the `Project homepage`_.
 .. _`VTK` : https://pypi.org/project/vtk
 .. _`OverlayBaseApp` : https://scikit-surgeryvtk.readthedocs.io/en/latest/sksurgeryvtk.widgets.OverlayBaseApp.html#module-sksurgeryvtk.widgets.OverlayBaseApp
 .. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtk_aruco_app.py
-.. _`OpenCV aruco tutorial` : https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
+.. _`OpenCV ArUco tutorial` : https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
 .. _`Project homepage` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01

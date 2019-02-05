@@ -9,8 +9,6 @@ Contents
   01_VTK_Overlay_App.rst
   02_VTK_Overlay_With_Movement.rst
   03_VTK_Overlay_With_Aruco_Tag.rst
-  requirements
-  pycharm
   Module Contents <modules>
 
 * :ref:`modindex`

@@ -23,6 +23,7 @@ method called _move_model.
 
    def update(self):
         _, image = self.video_source.read()
+        
         #add a method to move the rendered models
         self._move_model()
 
