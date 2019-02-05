@@ -31,9 +31,11 @@ class OverlayApp(OverlayBaseApp):
         self.camera_distortion = numpy.zeros((1,4),numpy.float32)
 
         #and call the constructor for the base class
-        super().__init__(video_source)
-        #super doesn't work the same in py2.7, try the following
-        #OverlayBaseApp.__init__(self,video_source)
+        if (sys.version_info > (3, 0)):
+            super().__init__(video_source)
+        else:
+            #super doesn't work the same in py2.7
+            OverlayBaseApp.__init__(self,video_source)
 
     def update(self):
         """Update the background render with a new frame and
