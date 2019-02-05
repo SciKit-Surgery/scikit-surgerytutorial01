@@ -5,6 +5,7 @@ variables:
 
 stages:
   - build
+  - test
   - deploy
 
 
@@ -18,6 +19,28 @@ build docs:
     paths:
     - doc/
     expire_in: 1 week
+
+test Linux:
+  stage: test
+  script:
+      - tox
+  tags:
+    - shared-linux
+
+
+test macOS:
+  stage: test
+  script:
+      - tox
+  tags:
+    - shared-mac
+
+test Windows:
+  stage: test
+  script:
+      - tox
+  tags:
+    - shared-win
 
 deploy docs to staging:
   stage: deploy
@@ -33,7 +56,6 @@ deploy docs to staging:
     - master
   dependencies:
     - build docs
-
 
 deploy docs to production:
   stage: deploy
