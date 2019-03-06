@@ -3,12 +3,14 @@
 # It is used by pip to manage software dependencies. It is not to be
 # confused with the software requirements, which are listed in
 # doc/requirements.rst
+-r requirements.txt
 #mock
 #pyfakefs
 #parameterized
+coverage
 pylint
 sphinx
 sphinx_rtd_theme
 #pyinstaller
-#pytest
-#tox
+pytest
+tox
