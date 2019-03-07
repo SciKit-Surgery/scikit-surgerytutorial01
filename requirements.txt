@@ -1,2 +1,5 @@
 PySide2
 scikit-surgeryvtk<=0.4.1
+opencv-contrib-python
+vtk
+numpy
