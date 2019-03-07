@@ -9,7 +9,7 @@ import cv2.aruco as aruco
 #add an import for numpy, to manipulate arrays
 import numpy
 from PySide2.QtWidgets import QApplication
-from sksurgeryvtk.widgets.OverlayBaseApp import OverlayBaseApp
+from sksurgeryutils.common_overlay_apps import OverlayBaseApp
 
 class OverlayApp(OverlayBaseApp):
     """Inherits from OverlayBaseApp, and adds methods to

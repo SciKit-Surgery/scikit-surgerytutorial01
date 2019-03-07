@@ -5,7 +5,7 @@ model overlaid in a live video feed"""
 
 import sys
 from PySide2.QtWidgets import QApplication
-from sksurgeryvtk.widgets.OverlayBaseApp import OverlayBaseApp
+from sksurgeryutils.common_overlay_apps import OverlayBaseApp
 
 #create an OverlayApp class, that inherits from OverlayBaseApp
 class OverlayApp(OverlayBaseApp):
