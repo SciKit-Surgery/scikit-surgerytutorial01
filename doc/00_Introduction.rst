@@ -16,14 +16,14 @@ introduce the user to SNAPPY. After completing the tutorial the user will have;
 - written an algorithm to track an ArUco tag in the live video and "attach" the rendered model
   to the feature.
 
-The tutorial makes use of the SNAPPY library scikit-surgeryvtk. The tutorial has been tested with
+The tutorial makes use of the SNAPPY library scikit-surgeryutils. The tutorial has been tested with
 Python 3.6 on Linux, Windows, and Mac. and Python 2.7 on Linux.
 
 Installation
 ~~~~~~~~~~~~
 Step 1:
 ::
-  pip install scikit-surgeryvtk
+  pip install scikit-surgeryutils
 
 Step 2: if you have git installed you can get the complete tutorial with;
 ::
