@@ -22,25 +22,27 @@ build docs:
 
 test Linux:
   stage: test
+  variables:
+    DISPLAY: localhost:1
   script:
       - tox
   tags:
-    - shared-linux
-
+    - shared-linux, gui
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
 
 test macOS:
   stage: test
   script:
       - tox
   tags:
-    - shared-mac
+    - shared-mac, gui
 
 test Windows:
   stage: test
   script:
       - tox
   tags:
-    - shared-win
+    - shared-win, gui
 
 deploy docs to staging:
   stage: deploy
