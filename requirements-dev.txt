@@ -4,10 +4,10 @@
 # confused with the software requirements, which are listed in
 # doc/requirements.rst
 -r requirements.txt
+coverage
 mock
 pyfakefs
 parameterized
-coverage
 pylint
 sphinx
 sphinx_rtd_theme
