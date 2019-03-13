@@ -25,6 +25,7 @@ test Linux:
   variables:
     DISPLAY: localhost:1
   script:
+      - echo "DISPLAY=${DISPLAY}"
       - tox
   tags:
     - shared-linux, gui
