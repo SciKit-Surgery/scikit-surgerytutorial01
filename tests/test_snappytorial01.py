@@ -14,21 +14,24 @@ from snappytutorial01.vtkoverlay_with_movement_app import OverlayApp as vtkmovin
 #I've just commented out the lines that start the viewer
 
 def test_vtk_aruco_app(setup_qt):
+    pass
 #    viewer = aruco(image_source = 'data/output.avi')
 #    viewer.add_vtk_models_from_dir('models')
 #    viewer.start()
-    assert True
+#    assert True
 
 def test_vtkoverlay_app(setup_qt):
+    pass
 #    viewer = vtkoverlay(video_source = 'data/output.avi')
 #    viewer.add_vtk_models_from_dir('models')
 #    viewer.start()
-    assert True
+#    assert True
 
 def test_vtkoverlay_with_movement_app(setup_qt):
+    pass
 #    viewer = vtkmovingoverlay(video_source = 'data/output.avi')
 #    viewer.add_vtk_models_from_dir('models')
 #    viewer.start()
-    assert True
+#    assert True
 
 
