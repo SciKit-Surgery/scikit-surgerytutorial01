@@ -158,12 +158,12 @@ You can download a
 That completes this tutorial. Please get in touch with any feedback or issues. You can
 use the issue tracker at the `Project homepage`_.
 
-.. _`scikit-surgeryvtk`: https://pypi.org/project/scikit-surgeryvtk
+.. _`scikit-surgeryutils`: https://pypi.org/project/scikit-surgeryutils
 .. _`scikit-surgerynditracker`: https://pypi.org/project/scikit-surgerynditracker
 .. _`PySide2`: https://pypi.org/project/PySide2
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
-.. _`OverlayBaseApp` : https://scikit-surgeryvtk.readthedocs.io/en/latest/sksurgeryvtk.widgets.OverlayBaseApp.html#module-sksurgeryvtk.widgets.OverlayBaseApp
+.. _`OverlayBaseApp` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseApp
 .. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtk_aruco_app.py
 .. _`OpenCV ArUco tutorial` : https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
 .. _`Project homepage` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01

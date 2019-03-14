@@ -64,9 +64,9 @@ to change the opacity etc.
 
 Next we will add some code to detect an ArUco marker and "pin" the model to it
 
-.. _`scikit-surgeryvtk`: https://pypi.org/project/scikit-surgeryvtk
+.. _`scikit-surgeryutils`: https://pypi.org/project/scikit-surgeryutils
 .. _`PySide2`: https://pypi.org/project/PySide2
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
-.. _`OverlayBaseApp` : https://scikit-surgeryvtk.readthedocs.io/en/latest/sksurgeryvtk.widgets.OverlayBaseApp.html#module-sksurgeryvtk.widgets.OverlayBaseApp
+.. _`OverlayBaseApp` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseApp
 .. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtkoverlay_with_movement_app.py

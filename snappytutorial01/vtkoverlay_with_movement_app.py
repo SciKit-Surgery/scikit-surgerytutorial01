@@ -5,7 +5,7 @@ model overlaid in a live video feed"""
 
 import sys
 from PySide2.QtWidgets import QApplication
-from sksurgeryvtk.widgets.OverlayBaseApp import OverlayBaseApp
+from sksurgeryutils.common_overlay_apps import OverlayBaseApp
 
 class OverlayApp(OverlayBaseApp):
     """Inherits from OverlayBaseApp, and adds a minimal
@@ -36,14 +36,15 @@ class OverlayApp(OverlayBaseApp):
             actor.SetOrientation(orientation)
 
 
-app = QApplication([])
+if __name__ == '__main__':
+    app = QApplication([])
 
-video_source = 0
-viewer = OverlayApp(video_source)
+    video_source = 0
+    viewer = OverlayApp(video_source)
 
-model_dir = '../models'
-viewer.add_vtk_models_from_dir(model_dir)
+    model_dir = '../models'
+    viewer.add_vtk_models_from_dir(model_dir)
 
-viewer.start()
+    viewer.start()
 
-sys.exit(app.exec_())
+    sys.exit(app.exec_())

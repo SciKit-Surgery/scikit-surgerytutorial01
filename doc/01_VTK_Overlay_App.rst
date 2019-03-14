@@ -9,7 +9,7 @@ Making a simple model overlay application
 Making an augmented reality application can be complicated. The developer
 requires an application framework to handle display, threading and user interface, something
 to provide video streaming, and finally a model renderer. The SNAPPY package
-`scikit-surgeryvtk`_ simplifies the process by integrating QT (`PySide2`_),
+`scikit-surgeryutils`_ simplifies the process by integrating QT (`PySide2`_),
 `OpenCV`_, and `VTK`_ into a simple to library.
 
 00 - Simple overlay application
@@ -23,7 +23,7 @@ Start with some import statements
 
   import sys
   from PySide2.QtWidgets import QApplication
-  from sksurgeryvtk.widgets.OverlayBaseApp import OverlayBaseApp
+  from sksurgeryutils.common_overlay_apps import OverlayBaseApp
 
 scikit-surgery provides an `OverlayBaseApp`_ module that creates a qtwidget showing
 a live stream from a video source, overlaid with a rendered surface model.
@@ -90,9 +90,9 @@ you delete some line or change part of the update method.
 Next we will add some code to the update loop to move the rendered model
 for each frame update.
 
-.. _`scikit-surgeryvtk`: https://pypi.org/project/scikit-surgeryvtk
+.. _`scikit-surgeryutils`: https://pypi.org/project/scikit-surgeryutils
 .. _`PySide2`: https://pypi.org/project/PySide2
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
-.. _`OverlayBaseApp` : https://scikit-surgeryvtk.readthedocs.io/en/latest/sksurgeryvtk.widgets.OverlayBaseApp.html#module-sksurgeryvtk.widgets.OverlayBaseApp
+.. _`OverlayBaseApp` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseApp
 .. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtkoverlay_app.py
