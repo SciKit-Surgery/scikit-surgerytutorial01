@@ -11,10 +11,6 @@ SNAPPYTutorial01
    :target: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/pipelines
    :alt: GitLab-CI test status
 
-.. image:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/badges/master/coverage.svg
-   :target: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/commits/master
-   :alt: Test coverage
-
 .. image:: https://readthedocs.org/projects/snappytutorial01/badge/?version=latest
    :target: https://snappytutorial01.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
