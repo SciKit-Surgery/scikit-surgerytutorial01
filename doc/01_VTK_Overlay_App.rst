@@ -9,7 +9,7 @@ Making a simple model overlay application
 In the first instance, let's just get a 3D rendering 
 of a model, overlaid on live video from your webcam, something like this ...
 
-.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/7-screenshots/doc/vtk_overlay_example.gif
+.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/vtk_overlay_example.gif
 
 00 - Simple overlay application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -28,7 +28,7 @@ unseen anatomy can be overlaid on the surgical scene, to help the surgeon
 find anatomy of interest. The example below is from the `SmartLiver`_ system, 
 developed using the `NifTK`_ platform.
 
-.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/7-screenshots/doc/croppedOverlayVideo.gif
+.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/croppedOverlayVideo.gif
 
 Making an augmented reality application from scratch can be quite complicated.
 The developer will require an

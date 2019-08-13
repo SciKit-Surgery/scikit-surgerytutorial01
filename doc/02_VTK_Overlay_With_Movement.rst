@@ -11,7 +11,7 @@ the position of model elements. Here we add a few lines of code to
 our update function to make the overlaid model move. You should end up 
 with something like this ...
 
-.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/7-screenshots/doc/vtk_overlay_with_movement_example.gif
+.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/vtk_overlay_with_movement_example.gif
 
 
 01 - Add some movement to the models
