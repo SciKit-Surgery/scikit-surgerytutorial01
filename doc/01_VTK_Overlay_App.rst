@@ -6,12 +6,10 @@
 Making a simple model overlay application
 ===============================================
 
-Making an augmented reality application from scratch requires an
-application framework to handle display, threading and user interface, something
-to provide video streaming, and finally a model renderer. The SNAPPY package
-`scikit-surgeryutils`_ simplifies the process by integrating QT (`PySide2`_),
-`OpenCV`_, and `VTK`_ into a simple to use Python library.
+In the first instance, let's just get a 3D rendering 
+of a model, overlaid on live video from your webcam, something like this ...
 
+.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/7-screenshots/doc/vtk_overlay_example.gif
 
 00 - Simple overlay application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,11 +82,8 @@ Now run the application with
   python vtkoverlay_app.py
 
 or similar. If successful you should see a live video stream overlaid with
-a rendered surface model, some thing like this... 
-
-.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/7-screenshots/doc/vtk_overlay_example.gif
-
-. Congratulations. If not you can download a
+a rendered surface model, something like the video at the top of the page.
+Congratulations. If not you can download a
 `finished example`_ and compare. Play around with it, see what happens if
 you delete some line or change part of the update method.
 
