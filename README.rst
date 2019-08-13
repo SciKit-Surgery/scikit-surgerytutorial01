@@ -1,5 +1,5 @@
-SNAPPYTutorial01
-===============================
+SNAPPY Augmented Reality Tutorial
+=================================
 
 .. image:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/project-icon.png
    :height: 128px
@@ -18,20 +18,22 @@ SNAPPYTutorial01
 
 Author: Stephen Thompson
 
-SNAPPYTutorial01 is part of the `SNAPPY`_ software project, developed at the `Wellcome EPSRC Centre for Interventional and Surgical Sciences`_, part of `University College London (UCL)`_.
+This is the SNAPPY Augmented Reality Tutorial. It will teach you how to write an augmented reality application, showing a rendered model on top of a live video feed.
 
-SNAPPYTutorial01 supports Python 2.7 and Python 3.6.
+The SNAPPY Augmented Reality Tutorial is part of the `SNAPPY`_ software project, developed at the `Wellcome EPSRC Centre for Interventional and Surgical Sciences`_, part of `University College London (UCL)`_. `SNAPPY`_ is a suite of Python modules developed to accelerate the translation of basic science into clinical applications. 
+
+The SNAPPY Augmented Reality Tutorial has been tested with Python 2.7 and Python 3.6 and Python 3.7.
 
 Purpose
 -------
 The tutorial guides the user in producing a simple augmented reality application using
-some SNAPPY libraries. The tutorial is intended to show how SNAPPY can be used to 
+some of the SNAPPY libraries. The tutorial is intended to show how SNAPPY can be used to 
 quickly develop applications that include;
   
-- data acquisition
-- data processing
-- data display
-- how SNAPPY enables the use of the many 3rd party Python libraries.
+- data acquisition,
+- data processing,
+- data display,
+- how SNAPPY enables the use of 3rd party Python libraries.
 
 To remain accessible to novice programmers the tutorial tries to avoid issues such as 
 parsing command line arguments, event loops and GUI design. 
@@ -67,7 +69,7 @@ Licensing and copyright
 -----------------------
 
 Copyright 2019 University College London.
-SNAPPYTutorial01 is released under the BSD-3 license. Please see the `license file`_ for details.
+The SNAPPY Augmented Reality Tutorial is released under the BSD-3 license. Please see the `license file`_ for details.
 
 
 Acknowledgements
