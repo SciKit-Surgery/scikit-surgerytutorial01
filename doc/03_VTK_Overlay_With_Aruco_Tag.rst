@@ -9,11 +9,22 @@ Detecting a feature to control model motion
 So far we haven't performed any data processing, which is a key
 element of any surgical AR system. Typically we might get tracking
 information from an external tracking system, for example using
-`scikit-surgerynditracker`_. However this isn't practical for a
-tutorial, so let's just use the video feed itself.
+`scikit-surgerynditracker`_. Alternatively computer vision can 
+be used to estimate the location of anatomy relative to the camera.
+
+For this example we're going to use computer vision to track an 
+ArUco tag, using OpenCV's implementation of the ArUco library. 
+We should end up with a 3D rendering that follows a tag as you move 
+it in front of the camera. Something like ...
+
+.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/7-screenshots/doc/vtk_overlay_aruco_example.gif
 
 02 - Add a feature detector and follower
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**You'll need an ArUco tag to track, print out** 
+`this one`_ .
+
 Create a copy of vtkoverlay_with_movement_app.py and call it
 vtk_aruco_app.py or similar.
 
@@ -122,7 +133,8 @@ Leave the rest of the file as is, and try running the application with
   python vtk_aruco_app.py
 
 or similar. If successful you should see a live video stream overlaid with
-a rendered surface model. When you hold the printed ArUco tag in front of the
+a rendered surface model, similar to the video at the top of the page.
+When you hold the printed ArUco tag in front of the
 camera, the model should approximately follow it.
 
 You may notice that the model appears and disappears at certain distances from the
@@ -167,3 +179,4 @@ use the issue tracker at the `Project homepage`_.
 .. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtk_aruco_app.py
 .. _`OpenCV ArUco tutorial` : https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
 .. _`Project homepage` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
+.. _`this one`: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/tags/tag_sheet_snappy01.pdf
