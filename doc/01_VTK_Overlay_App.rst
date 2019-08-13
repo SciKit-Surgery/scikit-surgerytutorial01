@@ -6,11 +6,12 @@
 Making a simple model overlay application
 ===============================================
 
-Making an augmented reality application can be complicated. The developer
-requires an application framework to handle display, threading and user interface, something
+Making an augmented reality application from scratch requires an
+application framework to handle display, threading and user interface, something
 to provide video streaming, and finally a model renderer. The SNAPPY package
 `scikit-surgeryutils`_ simplifies the process by integrating QT (`PySide2`_),
-`OpenCV`_, and `VTK`_ into a simple to use library.
+`OpenCV`_, and `VTK`_ into a simple to use Python library.
+
 
 00 - Simple overlay application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

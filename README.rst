@@ -1,7 +1,7 @@
 SNAPPY Augmented Reality Tutorial
 =================================
 
-.. image:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/project-icon.png
+.. image:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/7-screenshots/doc/vtk_overlay_aruco_example.gif
    :height: 128px
    :width: 128px
    :target: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
@@ -26,7 +26,7 @@ The SNAPPY Augmented Reality Tutorial has been tested with Python 2.7 and Python
 
 Purpose
 -------
-The tutorial guides the user in producing a simple augmented reality application using
+This tutorial guides the user in producing a simple augmented reality application using
 some of the SNAPPY libraries. The tutorial is intended to show how SNAPPY can be used to 
 quickly develop applications that include;
   
@@ -37,10 +37,6 @@ quickly develop applications that include;
 
 To remain accessible to novice programmers the tutorial tries to avoid issues such as 
 parsing command line arguments, event loops and GUI design. 
-
-
-Developing
-----------
 
 Cloning
 ^^^^^^^
