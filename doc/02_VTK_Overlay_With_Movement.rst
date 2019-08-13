@@ -8,7 +8,11 @@ Adding some model motion to overlay
 
 For image guided interventions we typically need some control over
 the position of model elements. Here we add a few lines of code to
-our update function
+our update function to make the overlaid model move. You should end up 
+with something like this ...
+
+.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/7-screenshots/doc/vtk_overlay_with_movement_example.gif
+
 
 01 - Add some movement to the models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -53,7 +57,8 @@ Leave the rest of the file as is, and try running the application with
   python vtkoverlay_with_movement_app.py
 
 or similar. If successful you should see a live video stream overlaid with
-a rendered surface model. The surface model should slowly rotate. Congratulations.
+a rendered surface model. The surface model should slowly rotate, like in the 
+video at the top of the page. Congratulations.
 Note that you can still use the VTK interactor to move the camera around or change the
 model representation. Have a play around and see how it interacts with the model rotation.
 
