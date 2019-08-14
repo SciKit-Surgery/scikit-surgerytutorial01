@@ -59,18 +59,6 @@ html_static_path = [static_folder]
 def generate_apidocs(*args):
     """Generate API docs automatically by trawling the available modules"""
 
-    global working_dir, module_path
-    output_path = working_dir
-    apidoc_command_path = 'sphinx-apidoc'
-    if hasattr(sys, 'real_prefix'):  # called from a virtualenv
-        apidoc_command_path = os.path.join(sys.prefix, 'bin', 'sphinx-apidoc')
-        apidoc_command_path = os.path.abspath(apidoc_command_path)
-    subprocess.check_call(
-        [apidoc_command_path, '--force', '--separate'] +
-        ['-o', output_path, module_path] +
-        [os.path.join(root_dir_abs, pattern) for pattern in exclude_patterns])
-
-
 def setup(app):
     # Hook to allow for automatic generation of API docs
     # before doc deployment begins.

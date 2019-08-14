@@ -1,7 +1,7 @@
 .. include:: ../README.rst
 
 Contents
-~~~~~~~~
+========
 .. toctree::
   :maxdepth: 1
 
@@ -10,6 +10,3 @@ Contents
   02_VTK_Overlay_With_Movement.rst
   03_VTK_Overlay_With_Aruco_Tag.rst
 
-* :ref:`modindex`
-* :ref:`genindex`
-* :ref:`search`
