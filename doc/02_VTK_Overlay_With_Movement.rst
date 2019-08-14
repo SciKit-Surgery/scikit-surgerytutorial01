@@ -1,6 +1,6 @@
 .. highlight:: shell
 
-.. _SimpleOverlayApp:
+.. _OverlayAppWithMovement:
 
 ===============================================
 Adding some model motion to overlay

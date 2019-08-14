@@ -44,6 +44,7 @@ Step 1:
 You'll need scikit-surgeryutils installed on your system. Provided you have Python installed on 
 your system you should be able to run ...
 ::
+ 
   pip install scikit-surgeryutils
 
 to install scikit-surgeryutils and its dependencies. If you don't have Python installed, we 
@@ -53,6 +54,7 @@ Step 2:
 You should now be able to follow the tutorial, using the code snippets contained herein.
 You can also download a completed tutorial, either using git;
 ::
+ 
   git clone https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
 
 or by downloading the files directly from 

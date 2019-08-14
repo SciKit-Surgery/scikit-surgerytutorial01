@@ -1,6 +1,6 @@
 .. highlight:: shell
 
-.. _SimpleOverlayApp:
+.. _OverlayAppWithArUco:
 
 ===============================================
 Detecting a feature to control model motion
