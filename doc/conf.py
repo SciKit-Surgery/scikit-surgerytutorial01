@@ -107,7 +107,7 @@ modindex_common_prefix = [
 ]
 
 # General information about the project.
-project = u'SNAPPYTutorial01'
+project = u'SNAPPY A.R. Tutorial'
 copyright = u"2019, University College London"
 author = u'Stephen Thompson'
 
