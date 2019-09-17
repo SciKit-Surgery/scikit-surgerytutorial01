@@ -9,12 +9,12 @@ Detecting a feature to control model motion
 So far we haven't performed any data processing, which is a key
 element of any surgical AR system. Typically we might get tracking
 information from an external tracking system, for example using
-`scikit-surgerynditracker`_. Alternatively computer vision can 
+`scikit-surgerynditracker`_. Alternatively computer vision can
 be used to estimate the location of anatomy relative to the camera.
 
-For this example we're going to use computer vision to track an 
-ArUco tag, using OpenCV's implementation of the ArUco library. 
-We should end up with a 3D rendering that follows a tag as you move 
+For this example we're going to use computer vision to track an
+ArUco tag, using OpenCV's implementation of the ArUco library.
+We should end up with a 3D rendering that follows a tag as you move
 it in front of the camera. Something like ...
 
 .. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/vtk_overlay_aruco_example.gif
@@ -22,7 +22,7 @@ it in front of the camera. Something like ...
 02 - Add a feature detector and follower
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**You'll need an ArUco tag to track, print out** 
+**You'll need an ArUco tag to track, print out**
 `this one`_ .
 
 Create a copy of vtkoverlay_with_movement_app.py and call it
@@ -166,6 +166,15 @@ will not match the video view.
 
 You can download a
 `finished example`_ of this tutorial file.
+
+You can also download the completed tutorial, either using git;
+::
+
+  git clone https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
+
+or by downloading the files directly from
+
+https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
 
 That completes this tutorial. Please get in touch with any feedback or issues. You can
 use the issue tracker at the `Project homepage`_.

@@ -52,14 +52,6 @@ recommend downloading an installer for your platform directly from `python.org`_
 
 Step 2: 
 You should now be able to follow the tutorial, using the code snippets contained herein.
-You can also download a completed tutorial, either using git;
-::
- 
-  git clone https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
-
-or by downloading the files directly from 
-
-https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
 
 .. _`python.org`: https://www.python.org/downloads/
 .. _`SmartLiver`: https://link.springer.com/article/10.1007/s11548-018-1761-3
