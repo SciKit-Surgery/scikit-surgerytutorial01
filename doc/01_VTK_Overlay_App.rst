@@ -6,7 +6,7 @@
 Making a simple model overlay application
 ===============================================
 
-In the first instance, let's just get a 3D rendering 
+In the first instance, let's just get a 3D rendering
 of a model, overlaid on live video from your webcam, something like this ...
 
 .. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/vtk_overlay_example.gif
@@ -50,6 +50,10 @@ and implement a minimal update method
         self.vtk_overlay_window.Render()
 
 Now we build the application itself.
+
+You'll need a surface model (stl, vtk, vtp), which
+you can put in a directory named "models". You can download the model used in the
+video above from the `project repository`_, or use a model of your own.
 
 ::
 
@@ -96,3 +100,4 @@ for each frame update.
 .. _`VTK` : https://pypi.org/project/vtk
 .. _`OverlayBaseApp` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseApp
 .. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtkoverlay_app.py
+.. _`project repository` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/models
