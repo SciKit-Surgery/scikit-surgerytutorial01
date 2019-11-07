@@ -48,7 +48,10 @@ your system you should be able to run ...
   pip install scikit-surgeryutils
 
 to install scikit-surgeryutils and its dependencies. If you don't have Python installed, we 
-recommend downloading an installer for your platform directly from `python.org`_
+recommend downloading an installer for your platform directly from `python.org`_.
+
+You can also use a virtual environment to run the tutorial without altering your system's Python 
+installation, see our instructions for `virtual environments`_.
 
 Step 2: 
 You should now be able to follow the tutorial, using the code snippets contained herein.
@@ -60,4 +63,5 @@ You should now be able to follow the tutorial, using the code snippets contained
 .. _`PySide2`: https://pypi.org/project/PySide2
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
+.. _`virtual environments` : https://weisslab.cs.ucl.ac.uk/WEISS/wiki/wikis/Creating-Python-Virtual-Environment-using-Anaconda/Minicoda-and-Virtualenv
 
