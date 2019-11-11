@@ -1,5 +1,16 @@
-scikit-surgeryutils>=0.3.3
-PySide2<=5.11.0
-opencv-contrib-python
-vtk
-numpy
+# Typically, SNAPPY libraries specify minimum requirements versions.
+# eg. vtk>=8.1.2.
+# This means pip will install the latest where possible.
+#
+# However, for maximum reliability, we should specify exact versions
+# that we know this tutorial has been tested with.
+six==1.13.0
+numpy==1.17.4
+vtk==8.1.2
+PySide2==5.13.1
+opencv-contrib-python==4.1.1.26
+scikit-surgerycore==0.1.7
+scikit-surgeryimage==0.6.2
+scikit-surgeryvtk==0.12.2
+scikit-surgeryutils==0.6.2
+

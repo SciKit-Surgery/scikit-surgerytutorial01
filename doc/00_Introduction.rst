@@ -45,7 +45,7 @@ You'll need scikit-surgeryutils installed on your system. Provided you have Pyth
 your system you should be able to run ...
 ::
  
-  pip install scikit-surgeryutils
+  pip install -r requirements-dev.txt
 
 to install scikit-surgeryutils and its dependencies. If you don't have Python installed, we 
 recommend downloading an installer for your platform directly from `python.org`_.
