@@ -1,5 +1,10 @@
-scikit-surgeryutils>=0.3.3
-PySide2<=5.11.0
-opencv-contrib-python
-vtk
-numpy
+# This file lists the python packages that your software depends on
+# for development.
+# It is used by pip to manage software dependencies. It is not to be
+# confused with the software requirements, which are listed in
+# doc/requirements.rst
+numpy>=1.17.4
+PySide2>=5.13.1
+opencv-contrib-python>=4.1.1.26
+scikit-surgeryutils>=0.6.2
+

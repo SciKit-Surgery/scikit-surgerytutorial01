@@ -82,7 +82,7 @@ self._move_model() with self._aruco_detect_and_follow().
         _, image = self.video_source.read()
 
         #add a method to move the rendered models
-        self._aruco_detect_and_follow()
+        self._aruco_detect_and_follow(image)
 
         self.vtk_overlay_window.set_video_image(image)
         self.vtk_overlay_window._RenderWindow.Render()
@@ -92,7 +92,7 @@ The tag detection code is taken from the `OpenCV ArUco tutorial`_.
 
 ::
 
-  def _aruco_detect_and_follow(self):
+  def _aruco_detect_and_follow(self, image):
         #detect any markers
         marker_corners, _, _ = aruco.detectMarkers(image, self.dictionary)
 
