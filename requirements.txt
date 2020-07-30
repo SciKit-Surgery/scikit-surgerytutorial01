@@ -4,7 +4,7 @@
 # confused with the software requirements, which are listed in
 # doc/requirements.rst
 numpy>=1.17.4
-PySide2>=5.13.1
+PySide2
 opencv-contrib-python>=4.1.1.26
 scikit-surgeryutils>=0.6.2
 
