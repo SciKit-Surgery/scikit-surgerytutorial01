@@ -53,7 +53,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
 	  pip install pip-tools
-	  pip-tools requirements.txt
+	  pip-compile requirements.txt
           pip install -r requirements-dev.txt
 
       - name: Run tests using xvfb (Ubuntu)
