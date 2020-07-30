@@ -4,6 +4,7 @@
 # confused with the software requirements, which are listed in
 # doc/requirements.rst
 -r requirements.txt
+pip-tools
 coverage
 mock
 pyfakefs
