@@ -1,18 +1,18 @@
-SNAPPY Augmented Reality Tutorial
-=================================
+SciKit-Surgery Augmented Reality Tutorial
+=========================================
 
-.. image:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/vtk_overlay_aruco_example.gif
+.. image:: https://github.com/UCL/scikit-surgerytutorial01/raw/master/doc/vtk_overlay_aruco_example.gif
    :height: 128px
    :width: 128px
-   :target: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
+   :target: https://github.com/UCL/scikit-surgeryturorial01
    :alt: Logo
 
-.. image:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/badges/master/pipeline.svg
-   :target: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/pipelines
-   :alt: GitLab-CI test status
+.. image:: https://github.com/UCL/scikit-surgerytutorial01/workflows/.github/workflows/ci.yml/badge.svg
+   :target: https://github.com/UCL/scikit-surgerytutorial01/actions
+   :alt: GitHub Actions CI status
 
-.. image:: https://readthedocs.org/projects/snappytutorial01/badge/?version=latest
-   :target: https://snappytutorial01.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/scikit-surgeryutorial01/badge/?version=latest
+   :target: https://scikit-surgerytutorial01.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
 
