@@ -15,6 +15,9 @@ SciKit-Surgery Augmented Reality Tutorial
    :target: https://scikit-surgerytutorial01.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
+.. image:: https://img.shields.io/badge/MICCAI%20Educational%20Challenge-Finalist-yellow
+   :target: https://miccai-sb.github.io/materials.html#mec2019
+   :alt: Finalist in 2019 MICCAI Educational Challenge
 
 Author: Stephen Thompson
 
