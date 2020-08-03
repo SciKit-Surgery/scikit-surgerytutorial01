@@ -64,19 +64,19 @@ jobs:
           export DISPLAY=":1"
           export LD_LIBRARY_PATH=$pythonLocation"/lib/python3.6/site-packages/PySide2/Qt/plugins/platfoms"
           coverage erase
-          coverage run -a --source ./snappytutorial01 -m pytest
+          coverage run -a --source ./sksurgerytutorial01 -m pytest
           coverage report -m
 
       - name: Run tests Windows/Mac
         if: contains(matrix.os, 'o')
         run: |
           coverage erase
-          coverage run -a --source ./snappytutorial01 -m pytest
+          coverage run -a --source ./sksurgerytutorial01 -m pytest
           coverage report -m
 
       - name: Linting
         run: |
-          pylint --rcfile=tests/pylintrc snappytutorial01
+          pylint --rcfile=tests/pylintrc sksurgerytutorial01
 
       - name: Run coveralls
         run: |
