@@ -17,7 +17,7 @@ ArUco tag, using OpenCV's implementation of the ArUco library.
 We should end up with a 3D rendering that follows a tag as you move
 it in front of the camera. Something like ...
 
-.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/vtk_overlay_aruco_example.gif
+.. figure:: https://github.com/UCL/SciKit-SurgeryTutorial01/raw/master/doc/vtk_overlay_aruco_example.gif
 
 02 - Add a feature detector and follower
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,7 +35,7 @@ Add an import statement for the ArUco detectors in OpenCV
   import cv2.aruco as aruco
 
 OpenCV provides numerous computer vision tools, and integrates seamlessly
-with SNAPPY using NumPy data structures, which we must also import
+with SciKit-Surgery using NumPy data structures, which we must also import
 
 ::
 
@@ -170,11 +170,11 @@ You can download a
 You can also download the completed tutorial, either using git;
 ::
 
-  git clone https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
+  git clone https://github.com/UCL/SciKit-SurgeryTutorial01
 
 or by downloading the files directly from
 
-https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
+https://github.com/UCL/SciKit-SurgeryTutorial01
 
 That completes this tutorial. Please get in touch with any feedback or issues. You can
 use the issue tracker at the `Project homepage`_.
@@ -185,7 +185,7 @@ use the issue tracker at the `Project homepage`_.
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
 .. _`OverlayBaseApp` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseApp
-.. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtk_aruco_app.py
+.. _`finished example` : https://github.com/UCL/SciKit-SurgeryTutorial01/blob/master/sksurgerytutorial01/vtk_aruco_app.py
 .. _`OpenCV ArUco tutorial` : https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
-.. _`Project homepage` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01
-.. _`this one`: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/tags/tag_sheet_snappy01.pdf
+.. _`Project homepage` : https://github.com/UCL/SciKit-SurgeryTutorial01
+.. _`this one`: https://github.com/UCL/SciKit-SurgeryTutorial01/blob/master/tags/tag_sheet_sksurgery01.pdf

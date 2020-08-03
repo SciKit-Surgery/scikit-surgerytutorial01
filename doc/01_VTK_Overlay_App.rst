@@ -9,7 +9,7 @@ Making a simple model overlay application
 In the first instance, let's just get a 3D rendering
 of a model, overlaid on live video from your webcam, something like this ...
 
-.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/vtk_overlay_example.gif
+.. figure:: https://github.com/UCL/SciKit-SurgeryTutorial01/raw/master/doc/vtk_overlay_example.gif
 
 00 - Simple overlay application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -99,5 +99,5 @@ for each frame update.
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
 .. _`OverlayBaseApp` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseApp
-.. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtkoverlay_app.py
-.. _`project repository` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/models
+.. _`finished example` : https://github.com/UCL/SciKit-SurgeryTutorial01/blob/master/sksurgerytutorial01/vtkoverlay_app.py
+.. _`project repository` : https://github.com/UCL/SciKit-SurgeryTutorial01/blob/master/models

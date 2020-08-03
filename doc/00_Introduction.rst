@@ -6,9 +6,9 @@
 Introduction
 ===============================================
 
-This is the SNAPPY Augmented Reality Tutorial. SNAPPY aims to support users in
+This is the SciKit-Surgery Augmented Reality Tutorial. SciKit-Surgery aims to support users in
 developing software applications for surgery. The aim of this tutorial is to
-introduce the user to SNAPPY. After completing the tutorial the user will be able to;
+introduce the user to SciKit-Surgery. After completing the tutorial the user will be able to;
 
 - make a small augmented reality that shows a rendered surface model overlaid on a
   live video,
@@ -16,7 +16,7 @@ introduce the user to SNAPPY. After completing the tutorial the user will be abl
 - write an algorithm to track an ArUco tag in the live video and "attach" the rendered model
   to the feature.
 
-The tutorial makes use of the SNAPPY library `scikit-surgeryutils`_. The tutorial has been tested with
+The tutorial makes use of the SciKit-Surgery library `scikit-surgeryutils`_. The tutorial has been tested with
 Python 3.6 and 3.7 on Linux, Windows, and Mac. and Python 2.7 on Linux.
 
 Augmented Reality in Surgery
@@ -28,12 +28,12 @@ unseen anatomy can be overlaid on the surgical scene, to help the surgeon
 find anatomy of interest. The example below is from the `SmartLiver`_ system, 
 developed using the `NifTK`_ platform.
 
-.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/croppedOverlayVideo.gif
+.. figure:: https://github.com/UCL/SciKit-SurgeryTutorial01/raw/master/doc/croppedOverlayVideo.gif
 
 Making an augmented reality application from scratch can be quite complicated.
 The developer will require an
 application framework to handle display, threading and user interface, something
-to provide video streaming, and finally a model renderer. The SNAPPY package
+to provide video streaming, and finally a model renderer. The SciKit-Surgery package
 `scikit-surgeryutils`_ simplifies the process by integrating QT (`PySide2`_),
 `OpenCV`_, and `VTK`_ into a simple to use Python library. This tutorial will
 guide the user in creating an augmented reality application in around 70 lines of code.

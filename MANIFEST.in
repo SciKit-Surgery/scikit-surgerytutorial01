@@ -1,2 +1,2 @@
 include versioneer.py
-include snappytutorial01/_version.py
+include scikit-surgerytutorial01/_version.py
