@@ -11,7 +11,7 @@ the position of model elements. Here we add a few lines of code to
 our update function to make the overlaid model move. You should end up 
 with something like this ...
 
-.. figure:: https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/raw/master/doc/vtk_overlay_with_movement_example.gif
+.. figure:: https://github.com/UCL/SciKit-SurgeryTutorial01/raw/master/doc/vtk_overlay_with_movement_example.gif
 
 
 01 - Add some movement to the models
@@ -74,4 +74,4 @@ Next we will add some code to detect an ArUco marker and "pin" the model to it
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
 .. _`OverlayBaseApp` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseApp
-.. _`finished example` : https://weisslab.cs.ucl.ac.uk/WEISS/SoftwareRepositories/SNAPPY/SNAPPYTutorial01/blob/master/snappytutorial01/vtkoverlay_with_movement_app.py
+.. _`finished example` : https://github.com/UCL/SciKit-SurgeryTutorial01/blob/master/sksurgerytutorial01/vtkoverlay_with_movement_app.py
