@@ -4,14 +4,11 @@
 model overlaid in a live video feed"""
 
 import sys
-#add an import for opencv, so we can use its aruco functions
-import cv2.aruco as aruco
 #add an import for numpy, to manipulate arrays
 import numpy
 from PySide2.QtWidgets import QApplication
 from sksurgerycore.transforms.transform_manager import TransformManager
 from sksurgeryutils.common_overlay_apps import OverlayBaseApp
-from sksurgeryvtk.utils.matrix_utils import create_vtk_matrix_from_numpy
 from sksurgeryarucotracker.arucotracker import ArUcoTracker
 
 class OverlayApp(OverlayBaseApp):
@@ -29,19 +26,18 @@ class OverlayApp(OverlayBaseApp):
         #for that we need a calibrated camera. For now let's just use a
         #a hard coded estimate. Maybe you could improve on this.
 
-        ar_config={
-                "tracker type": "aruco",
-                "video source": 'none',
-                "debug": False,
-                "dictionary" : 'DICT_4X4_50',
-                "marker size": 50,
-                "camera projection": numpy.array([[560.0, 0.0, 320.0],
-                                                  [0.0, 560.0, 240.0],
-                                                  [0.0, 0.0, 1.0]],
-                                                  dtype=numpy.float32),
-                "camera distortion": numpy.zeros((1, 4), numpy.float32)
-
-                  }
+        ar_config = {
+            "tracker type": "aruco",
+            "video source": 'none',
+            "debug": False,
+            "dictionary" : 'DICT_4X4_50',
+            "marker size": 50,
+            "camera projection": numpy.array([[560.0, 0.0, 320.0],
+                                              [0.0, 560.0, 240.0],
+                                              [0.0, 0.0, 1.0]],
+                                             dtype=numpy.float32),
+            "camera distortion": numpy.zeros((1, 4), numpy.float32)
+            }
 
         #and call the constructor for the base class
         if sys.version_info > (3, 0):
@@ -49,7 +45,7 @@ class OverlayApp(OverlayBaseApp):
         else:
             #super doesn't work the same in py2.7
             OverlayBaseApp.__init__(self, image_source)
-        
+
         self.tracker = ArUcoTracker(ar_config)
         self.tracker.start_tracking()
 
@@ -69,21 +65,22 @@ class OverlayApp(OverlayBaseApp):
     def _aruco_detect_and_follow(self, image):
         """Detect any aruco tags present using sksurgeryarucotracker
         """
-        
-        port_handles, _, _, camera2tag, _ = self.tracker.get_frame(image)
-        if camera2tag is not None:
-            self._move_model(camera2tag[0])
+
+        _port_handles, _timestamps, _frame_numbers, tag2camera, \
+                        _tracking_quality = self.tracker.get_frame(image)
+        if tag2camera is not None:
+            self._move_camera(tag2camera[0])
 
 
-    def _move_model(self, camera2tag):
+    def _move_camera(self, tag2camera):
         """Internal method to move the rendered models in
         some interesting way"""
 
         transform_manager = TransformManager()
-        transform_manager.add("camera2tag", camera2tag)
-        tag2camera = transform_manager.get("tag2camera")
+        transform_manager.add("tag2camera", tag2camera)
+        camera2tag = transform_manager.get("camera2tag")
 
-        self.vtk_overlay_window.set_camera_pose(tag2camera)
+        self.vtk_overlay_window.set_camera_pose(camera2tag)
 
 if __name__ == '__main__':
     app = QApplication([])
