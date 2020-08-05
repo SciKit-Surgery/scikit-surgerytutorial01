@@ -70,41 +70,20 @@ class OverlayApp(OverlayBaseApp):
         """Detect any aruco tags present using sksurgeryarucotracker
         """
         
-        port_handles, _, _, tag2camera, _ = self.tracker.get_frame(image)
-        if tag2camera is not None:
-            self._move_model(tag2camera[0])
+        port_handles, _, _, camera2tag, _ = self.tracker.get_frame(image)
+        if camera2tag is not None:
+            self._move_model(camera2tag[0])
 
 
-    def _move_model(self, tag2camera):
+    def _move_model(self, camera2tag):
         """Internal method to move the rendered models in
         some interesting way"""
 
-        #because the camera won't normally be at the origin,
-        #we need to find it and make movement relative to it
         transform_manager = TransformManager()
-        camera_vtk = self.vtk_overlay_window.get_foreground_camera().GetModelViewTransformMatrix()
-       
-        camera2world = numpy.eye(4, dtype = numpy.float64)
-        camera_vtk.DeepCopy(camera2world.ravel(), camera_vtk)
-        transform_manager.add("camera2world", camera2world)
-        transform_manager.add("camera2tag", tag2camera)
-        tag2world = transform_manager.get("tag2world")
-        #Iterate through the rendered models
-        for actor in \
-                self.vtk_overlay_window.get_foreground_renderer().GetActors():
-            #opencv and vtk seem to have different x-axis, flip the x-axis
-            actor.SetUserMatrix(create_vtk_matrix_from_numpy(tag2world))
-            #translation[0] = -translation[0]
+        transform_manager.add("camera2tag", camera2tag)
+        tag2camera = transform_manager.get("tag2camera")
 
-            #set the position, relative to the camera
-            #actor.SetPosition(camera.GetPosition() - translation)
-
-            #rvecs are in radians, VTK in degrees.
-            #rotation = 180 * rotation/3.14
-
-            #for orientation, opencv axes don't line up with VTK,
-            #uncomment the next line for some interesting results.
-            #actor.SetOrientation( rotation)
+        self.vtk_overlay_window.set_camera_pose(tag2camera)
 
 if __name__ == '__main__':
     app = QApplication([])

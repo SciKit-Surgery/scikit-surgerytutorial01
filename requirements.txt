@@ -9,4 +9,4 @@ opencv-contrib-python>=4.1.1.26
 scikit-surgeryvtk
 scikit-surgerycore
 scikit-surgeryutils>=0.6.2
-scikit-surgeryarucotracker>=0.1.0
+scikit-surgeryarucotracker>=0.1.1
