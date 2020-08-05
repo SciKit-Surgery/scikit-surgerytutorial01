@@ -19,25 +19,29 @@ class OverlayApp(OverlayBaseApp):
         """overrides the default constructor to add some member variables
         which wee need for the aruco tag detection"""
 
-        #the aruco tag dictionary to use. DICT_4X4_50 will work with the tag in
-        #../tags/aruco_4by4_0.pdf
-
-        #we'll use opencv to estimate the pose of the visible aruco tags.
-        #for that we need a calibrated camera. For now let's just use a
-        #a hard coded estimate. Maybe you could improve on this.
+        #we'll use SciKit-SurgeryArUcoTracker to estimate the pose of the
+        #visible ArUco tag relative to the camera. We use a dictionary to
+        #configure SciKit-SurgeryArUcoTracker
 
         ar_config = {
             "tracker type": "aruco",
+            #Set to none, to share video source with OverlayBaseApp
             "video source": 'none',
             "debug": False,
+            #the aruco tag dictionary to use. DICT_4X4_50 will work with
+            #../tags/aruco_4by4_0.pdf
             "dictionary" : 'DICT_4X4_50',
-            "marker size": 50,
+            "marker size": 50, # in mm
+            #We need a calibrated camera. For now let's just use a
+            #a hard coded estimate. Maybe you could improve on this.
             "camera projection": numpy.array([[560.0, 0.0, 320.0],
                                               [0.0, 560.0, 240.0],
                                               [0.0, 0.0, 1.0]],
                                              dtype=numpy.float32),
             "camera distortion": numpy.zeros((1, 4), numpy.float32)
             }
+        self.tracker = ArUcoTracker(ar_config)
+        self.tracker.start_tracking()
 
         #and call the constructor for the base class
         if sys.version_info > (3, 0):
@@ -45,9 +49,6 @@ class OverlayApp(OverlayBaseApp):
         else:
             #super doesn't work the same in py2.7
             OverlayBaseApp.__init__(self, image_source)
-
-        self.tracker = ArUcoTracker(ar_config)
-        self.tracker.start_tracking()
 
     def update(self):
         """Update the background render with a new frame and
@@ -66,20 +67,28 @@ class OverlayApp(OverlayBaseApp):
         """Detect any aruco tags present using sksurgeryarucotracker
         """
 
+        #tracker.get_frame(image) returns 5 lists of tracking data.
+        #we'll only use the tracking matrices (tag2camera)
         _port_handles, _timestamps, _frame_numbers, tag2camera, \
                         _tracking_quality = self.tracker.get_frame(image)
-        if tag2camera is not None:
-            self._move_camera(tag2camera[0])
 
+        if tag2camera is not None:
+            #pass the first entry in tag2camera. If you have more than one tag
+            #visible, you may need to do something cleverer here.
+            self._move_camera(tag2camera[0])
 
     def _move_camera(self, tag2camera):
         """Internal method to move the rendered models in
         some interesting way"""
 
+        #SciKit-SurgeryCore has a useful TransformManager that makes
+        #chaining together and inverting transforms more intuitive.
+        #We'll just use it to invert a matrix here.
         transform_manager = TransformManager()
         transform_manager.add("tag2camera", tag2camera)
         camera2tag = transform_manager.get("camera2tag")
 
+        #Let's move the camera, rather than the model this time.
         self.vtk_overlay_window.set_camera_pose(camera2tag)
 
 if __name__ == '__main__':
