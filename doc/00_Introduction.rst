@@ -16,7 +16,9 @@ introduce the user to SciKit-Surgery. After completing the tutorial the user wil
 - write an algorithm to track an ArUco tag in the live video and "attach" the rendered model
   to the feature.
 
-The tutorial makes use of the SciKit-Surgery library `scikit-surgeryutils`_. The tutorial has been tested with
+The tutorial makes use of the SciKit-Surgery library `SciKit-SurgeryUtils`_ to create a simple overlay
+window, showing a VTK model over a video stream. The last part of the tutorial uses `SciKit-SurgeryArUcoTracker`_ and `SciKit-SurgeryCore`_ to use the motion of a tracked marker to 
+move the model. The tutorial has been tested with
 Python 3.6 and 3.7 on Linux, Windows, and Mac. and Python 2.7 on Linux.
 
 Augmented Reality in Surgery
@@ -41,13 +43,20 @@ guide the user in creating an augmented reality application in around 70 lines o
 Installation
 ~~~~~~~~~~~~
 Step 1:
-You'll need scikit-surgeryutils installed on your system. Provided you have Python installed on 
+You'll need SciKit-SurgeryUtils installed on your system. Provided you have Python installed on 
 your system you should be able to run ...
 ::
  
   pip install scikit-surgeryutils
 
-to install scikit-surgeryutils and its dependencies. If you don't have Python installed, we 
+to install SciKit-SurgeryUtils and its dependencies (including SciKit-SurgeryCore).
+For the third part of the tutorial you'll also need SciKit-SurgeryArUcoTracker
+
+::
+
+  pip install scikit-surgeryarucotracker
+
+If you don't have Python installed, we 
 recommend downloading an installer for your platform directly from `python.org`_.
 
 You can also use a virtual environment to run the tutorial without altering your system's Python 
@@ -59,7 +68,9 @@ You should now be able to follow the tutorial, using the code snippets contained
 .. _`python.org`: https://www.python.org/downloads/
 .. _`SmartLiver`: https://link.springer.com/article/10.1007/s11548-018-1761-3
 .. _`NifTK`: https://link.springer.com/article/10.1007/s11548-014-1124-7
-.. _`scikit-surgeryutils`: https://pypi.org/project/scikit-surgeryutils/
+.. _`SciKit-SurgeryUtils`: https://pypi.org/project/scikit-surgeryutils/
+.. _`SciKit-SurgeryCore`: https://pypi.org/project/scikit-surgerycore/
+.. _`SciKit-SurgeryArUcoTracker`: https://pypi.org/project/scikit-surgeryarucotracker/
 .. _`PySide2`: https://pypi.org/project/PySide2
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk

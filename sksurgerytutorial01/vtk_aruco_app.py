@@ -7,8 +7,8 @@ import sys
 #add an import for numpy, to manipulate arrays
 import numpy
 from PySide2.QtWidgets import QApplication
-from sksurgerycore.transforms.transform_manager import TransformManager
 from sksurgeryutils.common_overlay_apps import OverlayBaseApp
+from sksurgerycore.transforms.transform_manager import TransformManager
 from sksurgeryarucotracker.arucotracker import ArUcoTracker
 
 class OverlayApp(OverlayBaseApp):
@@ -16,8 +16,7 @@ class OverlayApp(OverlayBaseApp):
     detect aruco tags and move the model to follow."""
 
     def __init__(self, image_source):
-        """overrides the default constructor to add some member variables
-        which wee need for the aruco tag detection"""
+        """override the default constructor to set up sksurgeryarucotracker"""
 
         #we'll use SciKit-SurgeryArUcoTracker to estimate the pose of the
         #visible ArUco tag relative to the camera. We use a dictionary to
