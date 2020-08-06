@@ -9,11 +9,10 @@ Detecting a feature to control model motion
 So far we haven't performed any data processing, which is a key
 element of any surgical AR system. Typically we might get tracking
 information from an external tracking system, for example using
-`scikit-surgerynditracker`_. Alternatively computer vision can
-be used to estimate the location of anatomy relative to the camera.
+`SciKit-SurgeryNDITracker`_. For this demo, as you're unlikely to 
+have an NDI tracker, we'll use `SciKit-SurgeryArUcoTracker`_ which
+uses computer vision to track a tag.
 
-For this example we're going to use computer vision to track an
-ArUco tag, using OpenCV's implementation of the ArUco library.
 We should end up with a 3D rendering that follows a tag as you move
 it in front of the camera. Something like ...
 
@@ -28,40 +27,55 @@ it in front of the camera. Something like ...
 Create a copy of vtkoverlay_with_movement_app.py and call it
 vtk_aruco_app.py or similar.
 
-Add an import statement for the ArUco detectors in OpenCV
+Add an import statement for SciKit-SurgeryArUcoTracker,
 
 ::
 
-  import cv2.aruco as aruco
+  from sksurgeryarucotracker.arucotracker import ArUcoTracker
 
-OpenCV provides numerous computer vision tools, and integrates seamlessly
-with SciKit-Surgery using NumPy data structures, which we must also import
+And an import statement for SciKit-Surgery's transform manager.
 
 ::
 
+  from sksurgerycore.transforms.transform_manager import TransformManager
+
+We'll also need NumPy to handle arrays;
+
+::
+ 
   import numpy
 
 
-Now we need some member variables to use with the ArUco tag detector. In our
-OverlayApp we will create a new __init__ function to override the one in the base
-class and define the member variables we will need
+Set up SciKit-SurgeryArUcoTracker in the __init__ function.
 
 ::
 
-   def __init__(self, image_source):
-        #the aruco tag dictionary to use. DICT_4X4_50 will work with the tag in
-        #../tags/tag_sheet_snappy01.pdf
-        self.dictionary = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
-        # The size of the aruco tag in mm
-        self.marker_size = 50
+  def __init__(self, image_source):
+        """override the default constructor to set up sksurgeryarucotracker"""
 
-        #we'll use opencv to estimate the pose of the visible aruco tags.
-        #for that we need a calibrated camera. For now let's just use a
-        #a hard coded estimate. Maybe you could improve on this.
-        self.camera_projection_mat = numpy.array([[560.0, 0.0, 320.0],
-                                                  [0.0, 560.0, 240.0],
-                                                  [0.0, 0.0, 1.0]])
-        self.camera_distortion = numpy.zeros((1, 4), numpy.float32)
+        #we'll use SciKit-SurgeryArUcoTracker to estimate the pose of the
+        #visible ArUco tag relative to the camera. We use a dictionary to
+        #configure SciKit-SurgeryArUcoTracker
+
+        ar_config = {
+            "tracker type": "aruco",
+            #Set to none, to share video source with OverlayBaseApp
+            "video source": 'none',
+            "debug": False,
+            #the aruco tag dictionary to use. DICT_4X4_50 will work with
+            #../tags/aruco_4by4_0.pdf
+            "dictionary" : 'DICT_4X4_50',
+            "marker size": 50, # in mm
+            #We need a calibrated camera. For now let's just use a
+            #a hard coded estimate. Maybe you could improve on this.
+            "camera projection": numpy.array([[560.0, 0.0, 320.0],
+                                              [0.0, 560.0, 240.0],
+                                              [0.0, 0.0, 1.0]],
+                                             dtype=numpy.float32),
+            "camera distortion": numpy.zeros((1, 4), numpy.float32)
+            }
+        self.tracker = ArUcoTracker(ar_config)
+        self.tracker.start_tracking()
 
         #and call the constructor for the base class
         if sys.version_info > (3, 0):
@@ -69,7 +83,6 @@ class and define the member variables we will need
         else:
             #super doesn't work the same in py2.7
             OverlayBaseApp.__init__(self, image_source)
-
 
 Edit the update method for the OverlayApp class, to call a new
 method called _aruco_detect_and_follow. Replace the call to method
@@ -88,42 +101,42 @@ self._move_model() with self._aruco_detect_and_follow().
         self.vtk_overlay_window._RenderWindow.Render()
 
 Then add a new method called _aruco_detect_and_follow to the class.
-The tag detection code is taken from the `OpenCV ArUco tutorial`_.
-
-::
-
-  def _aruco_detect_and_follow(self, image):
-        #detect any markers
-        marker_corners, _, _ = aruco.detectMarkers(image, self.dictionary)
-
-        if marker_corners:
-            #if any markers found, try and determine their pose
-            rvecs, tvecs, _ = aruco.estimatePoseSingleMarkers(marker_corners,
-                                                              self.marker_size,
-                                                              self.camera_projection_mat,
-                                                              self.camera_distortion)
-
-            self._move_model(rvecs[0][0], tvecs[0][0])
-
-
-Delete the _move_model method and replace it with the one
-below, which takes two position arguments.
 
 .. code-block:: python
 
-  def _move_model(self, rotation, translation):
+  def _aruco_detect_and_follow(self, image):
+        """Detect any aruco tags present using sksurgeryarucotracker
+        """
 
-        #because the camera won't normally be at the origin,
-        #we need to find it and make movement relative to it
-        camera = self.vtk_overlay_window.get_foreground_camera()
+        #tracker.get_frame(image) returns 5 lists of tracking data.
+        #we'll only use the tracking matrices (tag2camera)
+        _port_handles, _timestamps, _frame_numbers, tag2camera, \
+                        _tracking_quality = self.tracker.get_frame(image)
 
-        #Iterate through the rendered models
-        for actor in self.vtk_overlay_window.get_foreground_renderer().GetActors():
-            #opencv and vtk seem to have different x-axis, flip the x-axis
-            translation[0] = -translation[0]
+        if tag2camera is not None:
+            #pass the first entry in tag2camera. If you have more than one tag
+            #visible, you may need to do something cleverer here.
+            self._move_camera(tag2camera[0])
 
-            #set the position, relative to the camera
-            actor.SetPosition(camera.GetPosition() - translation)
+
+
+Delete the _move_model method and replace it with a new _move_camera method
+
+.. code-block:: python
+
+    def _move_camera(self, tag2camera):
+        """Internal method to move the rendered models in
+        some interesting way"""
+
+        #SciKit-SurgeryCore has a useful TransformManager that makes
+        #chaining together and inverting transforms more intuitive.
+        #We'll just use it to invert a matrix here.
+        transform_manager = TransformManager()
+        transform_manager.add("tag2camera", tag2camera)
+        camera2tag = transform_manager.get("camera2tag")
+
+        #Let's move the camera, rather than the model this time.
+        self.vtk_overlay_window.set_camera_pose(camera2tag)
 
 
 Leave the rest of the file as is, and try running the application with
@@ -148,16 +161,6 @@ code to the update method
 
 Maybe you can do something more sophisticated.
 
-Also, you may notice that the model does not change orientation. You could add the following
-to the _move_model method
-
-::
-
-  rotation = 180 * rotation/3.14
-  actor.SetOrientation( rotation)
-
-You will see that a further rotation is required to get a sensible result. See if you can
-work it out.
 
 Lastly you will notice that the model doesn't precisely follow the tag. This may be
 because we haven't calibrated the camera, we just took a guess, so the pose estimation
@@ -181,6 +184,7 @@ use the issue tracker at the `Project homepage`_.
 
 .. _`scikit-surgeryutils`: https://pypi.org/project/scikit-surgeryutils
 .. _`scikit-surgerynditracker`: https://pypi.org/project/scikit-surgerynditracker
+.. _`SciKit-SurgeryArUcoTracker`: https://pypi.org/project/scikit-surgeryarucotracker
 .. _`PySide2`: https://pypi.org/project/PySide2
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk

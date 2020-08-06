@@ -5,8 +5,6 @@
 # doc/requirements.rst
 numpy>=1.17.4
 PySide2
-opencv-contrib-python>=4.1.1.26
-scikit-surgeryvtk
 scikit-surgerycore
 scikit-surgeryutils>=0.6.2
 scikit-surgeryarucotracker>=0.1.1
