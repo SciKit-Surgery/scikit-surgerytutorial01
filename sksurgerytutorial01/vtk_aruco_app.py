@@ -4,34 +4,43 @@
 model overlaid in a live video feed"""
 
 import sys
-#add an import for opencv, so we can use its aruco functions
-import cv2.aruco as aruco
 #add an import for numpy, to manipulate arrays
 import numpy
 from PySide2.QtWidgets import QApplication
 from sksurgeryutils.common_overlay_apps import OverlayBaseApp
+from sksurgerycore.transforms.transform_manager import TransformManager
+from sksurgeryarucotracker.arucotracker import ArUcoTracker
 
 class OverlayApp(OverlayBaseApp):
     """Inherits from OverlayBaseApp, and adds methods to
     detect aruco tags and move the model to follow."""
 
     def __init__(self, image_source):
-        """overrides the default constructor to add some member variables
-        which wee need for the aruco tag detection"""
+        """override the default constructor to set up sksurgeryarucotracker"""
 
-        #the aruco tag dictionary to use. DICT_4X4_50 will work with the tag in
-        #../tags/aruco_4by4_0.pdf
-        self.dictionary = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
-        # The size of the aruco tag in mm
-        self.marker_size = 50
+        #we'll use SciKit-SurgeryArUcoTracker to estimate the pose of the
+        #visible ArUco tag relative to the camera. We use a dictionary to
+        #configure SciKit-SurgeryArUcoTracker
 
-        #we'll use opencv to estimate the pose of the visible aruco tags.
-        #for that we need a calibrated camera. For now let's just use a
-        #a hard coded estimate. Maybe you could improve on this.
-        self.camera_projection_mat = numpy.array([[560.0, 0.0, 320.0],
-                                                  [0.0, 560.0, 240.0],
-                                                  [0.0, 0.0, 1.0]])
-        self.camera_distortion = numpy.zeros((1, 4), numpy.float32)
+        ar_config = {
+            "tracker type": "aruco",
+            #Set to none, to share video source with OverlayBaseApp
+            "video source": 'none',
+            "debug": False,
+            #the aruco tag dictionary to use. DICT_4X4_50 will work with
+            #../tags/aruco_4by4_0.pdf
+            "dictionary" : 'DICT_4X4_50',
+            "marker size": 50, # in mm
+            #We need a calibrated camera. For now let's just use a
+            #a hard coded estimate. Maybe you could improve on this.
+            "camera projection": numpy.array([[560.0, 0.0, 320.0],
+                                              [0.0, 560.0, 240.0],
+                                              [0.0, 0.0, 1.0]],
+                                             dtype=numpy.float32),
+            "camera distortion": numpy.zeros((1, 4), numpy.float32)
+            }
+        self.tracker = ArUcoTracker(ar_config)
+        self.tracker.start_tracking()
 
         #and call the constructor for the base class
         if sys.version_info > (3, 0):
@@ -43,7 +52,6 @@ class OverlayApp(OverlayBaseApp):
     def update(self):
         """Update the background render with a new frame and
         scan for aruco tags"""
-
         _, image = self.video_source.read()
         self._aruco_detect_and_follow(image)
 
@@ -55,46 +63,32 @@ class OverlayApp(OverlayBaseApp):
         self.vtk_overlay_window.Render()
 
     def _aruco_detect_and_follow(self, image):
-        """Detect any aruco tags present. Based on;
-        https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
+        """Detect any aruco tags present using sksurgeryarucotracker
         """
-        #detect any markers
-        marker_corners, _, _ = aruco.detectMarkers(image, self.dictionary)
 
-        if marker_corners:
-            #if any markers found, try and determine their pose
-            rvecs, tvecs, _ = \
-                    aruco.estimatePoseSingleMarkers(marker_corners,
-                                                    self.marker_size,
-                                                    self.camera_projection_mat,
-                                                    self.camera_distortion)
+        #tracker.get_frame(image) returns 5 lists of tracking data.
+        #we'll only use the tracking matrices (tag2camera)
+        _port_handles, _timestamps, _frame_numbers, tag2camera, \
+                        _tracking_quality = self.tracker.get_frame(image)
 
-            self._move_model(rvecs[0][0], tvecs[0][0])
+        if tag2camera is not None:
+            #pass the first entry in tag2camera. If you have more than one tag
+            #visible, you may need to do something cleverer here.
+            self._move_camera(tag2camera[0])
 
-
-    def _move_model(self, rotation, translation):
+    def _move_camera(self, tag2camera):
         """Internal method to move the rendered models in
         some interesting way"""
 
-        #because the camera won't normally be at the origin,
-        #we need to find it and make movement relative to it
-        camera = self.vtk_overlay_window.get_foreground_camera()
+        #SciKit-SurgeryCore has a useful TransformManager that makes
+        #chaining together and inverting transforms more intuitive.
+        #We'll just use it to invert a matrix here.
+        transform_manager = TransformManager()
+        transform_manager.add("tag2camera", tag2camera)
+        camera2tag = transform_manager.get("camera2tag")
 
-        #Iterate through the rendered models
-        for actor in \
-                self.vtk_overlay_window.get_foreground_renderer().GetActors():
-            #opencv and vtk seem to have different x-axis, flip the x-axis
-            translation[0] = -translation[0]
-
-            #set the position, relative to the camera
-            actor.SetPosition(camera.GetPosition() - translation)
-
-            #rvecs are in radians, VTK in degrees.
-            rotation = 180 * rotation/3.14
-
-            #for orientation, opencv axes don't line up with VTK,
-            #uncomment the next line for some interesting results.
-            #actor.SetOrientation( rotation)
+        #Let's move the camera, rather than the model this time.
+        self.vtk_overlay_window.set_camera_pose(camera2tag)
 
 if __name__ == '__main__':
     app = QApplication([])

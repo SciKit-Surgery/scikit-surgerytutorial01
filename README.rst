@@ -1,7 +1,7 @@
 SciKit-Surgery Augmented Reality Tutorial
 =========================================
 
-.. image:: https://github.com/UCL/scikit-surgerytutorial01/raw/master/doc/vtk_overlay_aruco_example.gif
+.. image:: https://github.com/UCL/scikit-surgerytutorial01/raw/master/project-icon.gif
    :height: 128px
    :width: 128px
    :target: https://github.com/UCL/scikit-surgeryturorial01
