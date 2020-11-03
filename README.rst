@@ -7,9 +7,7 @@ SciKit-Surgery Augmented Reality Tutorial
    :target: https://github.com/UCL/scikit-surgeryturorial01
    :alt: Logo
 
-.. image:: https://github.com/UCL/scikit-surgerytutorial01/workflows/.github/workflows/ci.yml/badge.svg
-   :target: https://github.com/UCL/scikit-surgerytutorial01/actions
-   :alt: GitHub Actions CI status
+|
 
 .. image:: https://readthedocs.org/projects/scikit-surgerytutorial01/badge/?version=latest
    :target: https://scikit-surgerytutorial01.readthedocs.io/en/latest/?badge=latest
