@@ -29,7 +29,7 @@ class OverlayApp(OverlayBaseApp):
             "debug": False,
             #the aruco tag dictionary to use. DICT_4X4_50 will work with
             #../tags/aruco_4by4_0.pdf
-            "dictionary" : 'DICT_4X4_50',
+            "aruco dictionary" : 'DICT_4X4_50',
             "marker size": 50, # in mm
             #We need a calibrated camera. For now let's just use a
             #a hard coded estimate. Maybe you could improve on this.
