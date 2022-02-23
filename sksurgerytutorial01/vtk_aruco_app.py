@@ -71,7 +71,9 @@ class OverlayApp(OverlayBaseApp):
         _port_handles, _timestamps, _frame_numbers, tag2camera, \
                         _tracking_quality = self.tracker.get_frame(image)
 
-        if tag2camera is not None:
+        #If no tags are detected tag2camera will be an empty list, which
+        #Python interprets as False
+        if tag2camera:
             #pass the first entry in tag2camera. If you have more than one tag
             #visible, you may need to do something cleverer here.
             self._move_camera(tag2camera[0])

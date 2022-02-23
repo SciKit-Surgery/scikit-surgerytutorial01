@@ -11,6 +11,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-ver: [3.7, 3.8]
         experimental: [false]
+        exclude:
+          - os: macos-latest
+            python-ver: 3.6
         include:
           - python-ver: 3.9
             os: ubuntu-latest
