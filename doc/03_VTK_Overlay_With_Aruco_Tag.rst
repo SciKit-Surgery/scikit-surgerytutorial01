@@ -16,7 +16,7 @@ uses computer vision to track a tag.
 We should end up with a 3D rendering that follows a tag as you move
 it in front of the camera. Something like ...
 
-.. figure:: https://github.com/UCL/SciKit-SurgeryTutorial01/raw/master/doc/vtk_overlay_aruco_example.gif
+.. figure:: https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01/raw/master/doc/vtk_overlay_aruco_example.gif
 
 02 - Add a feature detector and follower
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -175,11 +175,11 @@ You can download a
 You can also download the completed tutorial, either using git;
 ::
 
-  git clone https://github.com/UCL/SciKit-SurgeryTutorial01
+  git clone https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01
 
 or by downloading the files directly from
 
-https://github.com/UCL/SciKit-SurgeryTutorial01
+https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01
 
 That completes this tutorial. Please get in touch with any feedback or issues. You can
 use the issue tracker at the `Project homepage`_.
@@ -191,7 +191,7 @@ use the issue tracker at the `Project homepage`_.
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
 .. _`OverlayBaseApp` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseApp
-.. _`finished example` : https://github.com/UCL/SciKit-SurgeryTutorial01/blob/master/sksurgerytutorial01/vtk_aruco_app.py
+.. _`finished example` : https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01/blob/master/sksurgerytutorial01/vtk_aruco_app.py
 .. _`OpenCV ArUco tutorial` : https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
-.. _`Project homepage` : https://github.com/UCL/SciKit-SurgeryTutorial01
-.. _`this one`: https://github.com/UCL/SciKit-SurgeryTutorial01/blob/master/tags/tag_sheet_sksurgery01.pdf
+.. _`Project homepage` : https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01
+.. _`this one`: https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01/blob/master/tags/tag_sheet_sksurgery01.pdf
