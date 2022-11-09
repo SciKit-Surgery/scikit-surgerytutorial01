@@ -5,13 +5,13 @@ model overlaid in a live video feed"""
 
 import sys
 from PySide2.QtWidgets import QApplication
-from sksurgeryutils.common_overlay_apps import OverlayBaseApp
+from sksurgeryutils.common_overlay_apps import OverlayBaseWidget
 
-class OverlayApp(OverlayBaseApp):
-    """Inherits from OverlayBaseApp, and adds a minimal
-    implementation of update. """
+class OverlayApp(OverlayBaseWidget):
+    """Inherits from OverlayBaseWidget, and adds a minimal
+    implementation of update_view. """
 
-    def update(self):
+    def update_view(self):
         """Update the background renderer with a new frame,
         move the model and render"""
         _, image = self.video_source.read()
@@ -45,6 +45,7 @@ if __name__ == '__main__':
     model_dir = '../models'
     viewer.add_vtk_models_from_dir(model_dir)
 
+    viewer.show()
     viewer.start()
 
     sys.exit(app.exec_())

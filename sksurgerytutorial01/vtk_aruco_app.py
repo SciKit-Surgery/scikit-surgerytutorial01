@@ -7,12 +7,12 @@ import sys
 #add an import for numpy, to manipulate arrays
 import numpy
 from PySide2.QtWidgets import QApplication
-from sksurgeryutils.common_overlay_apps import OverlayBaseApp
+from sksurgeryutils.common_overlay_apps import OverlayBaseWidget
 from sksurgerycore.transforms.transform_manager import TransformManager
 from sksurgeryarucotracker.arucotracker import ArUcoTracker
 
-class OverlayApp(OverlayBaseApp):
-    """Inherits from OverlayBaseApp, and adds methods to
+class OverlayApp(OverlayBaseWidget):
+    """Inherits from OverlayBaseWidget, and adds methods to
     detect aruco tags and move the model to follow."""
 
     def __init__(self, image_source):
@@ -24,7 +24,7 @@ class OverlayApp(OverlayBaseApp):
 
         ar_config = {
             "tracker type": "aruco",
-            #Set to none, to share video source with OverlayBaseApp
+            #Set to none, to share video source with OverlayBaseWidget
             "video source": 'none',
             "debug": False,
             #the aruco tag dictionary to use. DICT_4X4_50 will work with
@@ -47,9 +47,9 @@ class OverlayApp(OverlayBaseApp):
             super().__init__(image_source)
         else:
             #super doesn't work the same in py2.7
-            OverlayBaseApp.__init__(self, image_source)
+            OverlayBaseWidget.__init__(self, image_source)
 
-    def update(self):
+    def update_view(self):
         """Update the background render with a new frame and
         scan for aruco tags"""
         _, image = self.video_source.read()
@@ -101,6 +101,7 @@ if __name__ == '__main__':
     model_dir = '../models'
     viewer.add_vtk_models_from_dir(model_dir)
 
+    viewer.show()
     viewer.start()
 
     sys.exit(app.exec_())

@@ -21,7 +21,7 @@ it in front of the camera. Something like ...
 02 - Add a feature detector and follower
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**You'll need an ArUco tag to track, print out**
+**You'll need an ArUco tag to track, print it out in A4**
 `this one`_ .
 
 Create a copy of vtkoverlay_with_movement_app.py and call it
@@ -46,7 +46,7 @@ We'll also need NumPy to handle arrays;
   import numpy
 
 
-Set up SciKit-SurgeryArUcoTracker in the __init__ function.
+Set up SciKit-SurgeryArUcoTracker in the __init__ function of OverlayApp Class.
 
 ::
 
@@ -64,7 +64,7 @@ Set up SciKit-SurgeryArUcoTracker in the __init__ function.
             "debug": False,
             #the aruco tag dictionary to use. DICT_4X4_50 will work with
             #../tags/aruco_4by4_0.pdf
-            "dictionary" : 'DICT_4X4_50',
+            "aruco dictionary" : 'DICT_4X4_50',
             "marker size": 50, # in mm
             #We need a calibrated camera. For now let's just use a
             #a hard coded estimate. Maybe you could improve on this.
@@ -91,7 +91,7 @@ self._move_model() with self._aruco_detect_and_follow().
 .. code-block:: python
    :emphasize-lines: 4,5
 
-   def update(self):
+   def update_view(self):
         _, image = self.video_source.read()
 
         #add a method to move the rendered models
@@ -175,11 +175,11 @@ You can download a
 You can also download the completed tutorial, either using git;
 ::
 
-  git clone https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01
+  git clone https://github.com/SciKit-Surgery/scikit-surgerytutorial01
 
 or by downloading the files directly from
 
-https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01
+https://github.com/SciKit-Surgery/scikit-surgerytutorial01
 
 That completes this tutorial. Please get in touch with any feedback or issues. You can
 use the issue tracker at the `Project homepage`_.
@@ -194,4 +194,4 @@ use the issue tracker at the `Project homepage`_.
 .. _`finished example` : https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01/blob/master/sksurgerytutorial01/vtk_aruco_app.py
 .. _`OpenCV ArUco tutorial` : https://docs.opencv.org/3.4/d5/dae/tutorial_aruco_detection.html
 .. _`Project homepage` : https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01
-.. _`this one`: https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01/blob/master/tags/tag_sheet_sksurgery01.pdf
+.. _`this one`: https://github.com/SciKit-Surgery/scikit-surgerytutorial01/blob/master/tags/tag_sheet_snappy01.pdf
