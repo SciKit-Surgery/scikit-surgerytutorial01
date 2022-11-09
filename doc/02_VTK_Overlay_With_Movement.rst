@@ -25,9 +25,9 @@ method called _move_model.
 .. code-block:: python
    :emphasize-lines: 4,5
 
-   def update(self):
+   def update_view(self):
         _, image = self.video_source.read()
-        
+
         #add a method to move the rendered models
         self._move_model()
 
@@ -59,6 +59,7 @@ Leave the rest of the file as is, and try running the application with
 or similar. If successful you should see a live video stream overlaid with
 a rendered surface model. The surface model should slowly rotate, like in the 
 video at the top of the page. Congratulations.
+
 Note that you can still use the VTK interactor to move the camera around or change the
 model representation. Have a play around and see how it interacts with the model rotation.
 

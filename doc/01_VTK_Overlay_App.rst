@@ -13,8 +13,8 @@ of a model, overlaid on live video from your webcam, something like this ...
 
 00 - Simple overlay application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Using your favourite text editor or Python development environment,
-create a new file called vtkoverlay_app.py or similar.
+Using your favourite text editor or Python development environment (e.g., `pycharm`_, `vscode`_, etc),
+create a new file called vtkoverlay_app.py or similar under a new directory applications or your preferred name.
 
 Start with some import statements
 
@@ -38,7 +38,7 @@ and implement a minimal update method
 
 ::
 
-    def update(self):
+    def update_view(self):
 
         #read a new image from the video source
         _, image = self.video_source.read()
@@ -57,27 +57,30 @@ video above from the `project repository`_, or use a model of your own.
 
 ::
 
-  #first we create an application
-  app = QApplication([])
+  if __name__ == '__main__':
+    #first we create an application
+    app = QApplication([])
 
-  #then an instance of OverlayApp. The video source
-  #is set when we create the instance. This is an index
-  #starting at 0. If you have more than one webcam, you can
-  #try using different numbered sources
-  video_source = 0
-  viewer = OverlayApp(video_source)
+    #then an instance of OverlayApp. The video source
+    #is set when we create the instance. This is an index
+    #starting at 0. If you have more than one webcam, you can
+    #try using different numbered sources
+    video_source = 0
+    viewer = OverlayApp(video_source)
 
-  #Set a model directory containing the models you wish
-  #to render and optionally a colours.txt defining the
-  #colours to render in.
-  model_dir = '../models'
-  viewer.add_vtk_models_from_dir(model_dir)
+    #Set a model directory containing the models you wish
+    #to render and optionally a colours.txt defining the
+    #colours to render in.
+    model_dir = '../models'
+    viewer.add_vtk_models_from_dir(model_dir)
 
-  #start the viewer
-  viewer.start()
+    #start the viewer
+    viewer.show()
+    viewer.start()
 
-  #start the application
-  sys.exit(app.exec_())
+    #start the application
+    sys.exit(app.exec_())
+
 
 Now run the application with
 
@@ -101,3 +104,5 @@ for each frame update.
 .. _`OverlayBaseWidget` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseWidget
 .. _`finished example` : https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01/blob/master/sksurgerytutorial01/vtkoverlay_app.py
 .. _`project repository` : https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01/blob/master/models
+.. _ pycharm` : https://www.jetbrains.com/pycharm/download/#section=linux
+.. _ vscode` : https://code.visualstudio.com/

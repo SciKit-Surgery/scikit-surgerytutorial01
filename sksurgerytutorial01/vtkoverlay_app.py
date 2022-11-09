@@ -39,6 +39,7 @@ if __name__ == '__main__':
     viewer.add_vtk_models_from_dir(model_dir)
 
     #start the viewer
+    viewer.show()
     viewer.start()
 
     #start the application

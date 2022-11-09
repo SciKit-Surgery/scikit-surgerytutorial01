@@ -59,8 +59,42 @@ For the third part of the tutorial you'll also need SciKit-SurgeryArUcoTracker
 If you don't have Python installed, we 
 recommend downloading an installer for your platform directly from `python.org`_.
 
-You can also use a virtual environment to run the tutorial without altering your system's Python 
-installation, see our instructions for `virtual environments`_.
+Virtual environments
+~~~~~~~~~~~~
+Virtualenv, venv, conda or pyenv can be used to create virtual environments to manage python packages.
+You can use conda env by installing conda for your OS (`conda_installation`_) and use the following yml file with all dependencies.
+::
+   ## Create scikit-surgerytutorial01VE.yml in your favorite location with the following content:
+   ##
+   ##  scikit-surgerytutorial01VE.yml
+   ##
+   ## Some useful commands to manage your conda env:
+   ## LIST CONDA ENVS: conda list -n *VE # show list of installed packages
+   ## UPDATE CONDA: conda update -n base -c defaults conda
+   ## INSTALL CONDA EV: conda env create -f *VE.yml
+   ## UPDATE CONDA ENV: conda env update --file *VE.yml --prune
+   ## ACTIVATE CONDA ENV: conda activate *VE
+   ## REMOVE CONDA ENV: conda remove -n *VE --all
+
+   name: scikit-surgerytutorial01VE
+   channels:
+     - defaults
+     - conda-forge #vtk; tox;
+     - anaconda #coverage; scipy;
+   dependencies:
+     - python=3.7
+     - numpy>=1.17.4
+     - vtk=8.1.2
+     - tox>=3.26.0
+     - pytest>=7.1.2
+     - pylint>=2.14.5
+     - pip>=22.2.2
+     - pip:
+        - PySide2>=5.14.2.3
+        - scikit-surgerycore>=0.1.7
+        - scikit-surgeryutils>=1.2.0
+        - scikit-surgeryarucotracker>=0.1.1
+        - opencv-python-headless
 
 Step 2: 
 You should now be able to follow the tutorial, using the code snippets contained herein.
@@ -74,5 +108,4 @@ You should now be able to follow the tutorial, using the code snippets contained
 .. _`PySide2`: https://pypi.org/project/PySide2
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
-.. _`virtual environments` : https://weisslab.cs.ucl.ac.uk/WEISS/wiki/wikis/Creating-Python-Virtual-Environment-using-Anaconda/Minicoda-and-Virtualenv
-
+.. _`conda_installation` : https://conda.io/projects/conda/en/latest/user-guide/install/index.html
