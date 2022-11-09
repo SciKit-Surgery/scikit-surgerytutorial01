@@ -49,7 +49,7 @@ class OverlayApp(OverlayBaseWidget):
             #super doesn't work the same in py2.7
             OverlayBaseWidget.__init__(self, image_source)
 
-    def update(self):
+    def update_view(self):
         """Update the background render with a new frame and
         scan for aruco tags"""
         _, image = self.video_source.read()
