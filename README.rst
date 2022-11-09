@@ -28,8 +28,8 @@ SciKit-Surgery Augmented Reality Tutorial
    :target: https://twitter.com/scikit_surgery?ref_src=twsrc%5Etfw
    :alt: Follow scikit_surgery on twitter
 
-Author(s): Stephen Thompson
-Contributor(s): Miguel Xochicale, Mian Asbat Ahmad and Matt Clarkson    
+Author(s): Stephen Thompson.
+Contributor(s): Miguel Xochicale, Mian Asbat Ahmad and Matt Clarkson.
 
 This is the SciKit-Surgery Augmented Reality Tutorial. It will teach you how to write an augmented reality application, showing a rendered model on top of a live video feed.
 
