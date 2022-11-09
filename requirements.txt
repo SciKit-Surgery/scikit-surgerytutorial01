@@ -8,4 +8,3 @@ PySide2
 scikit-surgerycore>=0.1.7
 scikit-surgeryutils>=1.2.0
 scikit-surgeryarucotracker>= 0.2.7
-scikit-surgeryopencvcpp
