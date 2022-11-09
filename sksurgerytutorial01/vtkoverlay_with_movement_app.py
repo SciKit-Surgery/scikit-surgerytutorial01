@@ -5,10 +5,10 @@ model overlaid in a live video feed"""
 
 import sys
 from PySide2.QtWidgets import QApplication
-from sksurgeryutils.common_overlay_apps import OverlayBaseApp
+from sksurgeryutils.common_overlay_apps import OverlayBaseWidget
 
-class OverlayApp(OverlayBaseApp):
-    """Inherits from OverlayBaseApp, and adds a minimal
+class OverlayApp(OverlayBaseWidget):
+    """Inherits from OverlayBaseWidget, and adds a minimal
     implementation of update. """
 
     def update(self):

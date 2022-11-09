@@ -22,17 +22,17 @@ Start with some import statements
 
   import sys
   from PySide2.QtWidgets import QApplication
-  from sksurgeryutils.common_overlay_apps import OverlayBaseApp
+  from sksurgeryutils.common_overlay_apps import OverlayBaseWidget
 
-scikit-surgery provides an `OverlayBaseApp`_ module that creates a qtwidget showing
+scikit-surgery provides an `OverlayBaseWidget`_ module that creates a qtwidget showing
 a live stream from a video source, overlaid with a rendered surface model.
 scikit-surgery leaves the update method unimplemented so that the user
 can implement their own version in an child class.
 
 ::
 
-  #create an OverlayApp class, that inherits from OverlayBaseApp
-  class OverlayApp(OverlayBaseApp):
+  #create an OverlayApp class, that inherits from OverlayBaseWidget
+  class OverlayApp(OverlayBaseWidget):
 
 and implement a minimal update method
 
@@ -98,6 +98,6 @@ for each frame update.
 .. _`PySide2`: https://pypi.org/project/PySide2
 .. _`OpenCV` : https://pypi.org/project/opencv-contrib-python
 .. _`VTK` : https://pypi.org/project/vtk
-.. _`OverlayBaseApp` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseApp
+.. _`OverlayBaseWidget` : https://scikit-surgeryutils.readthedocs.io/en/latest/sksurgeryutils.common_overlay_apps.html#module-sksurgeryutils.common_overlay_apps.OverlayBaseWidget
 .. _`finished example` : https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01/blob/master/sksurgerytutorial01/vtkoverlay_app.py
 .. _`project repository` : https://github.com/SciKit-Surgery/SciKit-SurgeryTutorial01/blob/master/models
