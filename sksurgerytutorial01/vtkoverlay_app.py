@@ -11,7 +11,7 @@ from sksurgeryutils.common_overlay_apps import OverlayBaseWidget
 class OverlayApp(OverlayBaseWidget):
     """Inherits from OverlayBaseApp, and adds a minimal
     implementation of update. """
-    def update(self):
+    def update_view(self):
         """Update the background renderer with a new frame,
         and render"""
         _, image = self.video_source.read()
