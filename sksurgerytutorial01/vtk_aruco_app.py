@@ -1,12 +1,15 @@
-# coding=utf-8
+"""
+Script to create a viewer window with a movable surface
+model overlaid in a live video feed
 
-"""Script to create a viewer window with a movable surface
-model overlaid in a live video feed"""
+USAGE:
+python vtk_aruco_app.py
+"""
 
 import sys
 #add an import for numpy, to manipulate arrays
 import numpy
-from PySide2.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 from sksurgeryutils.common_overlay_apps import OverlayBaseWidget
 from sksurgerycore.transforms.transform_manager import TransformManager
 from sksurgeryarucotracker.arucotracker import ArUcoTracker
@@ -60,6 +63,8 @@ class OverlayApp(OverlayBaseWidget):
         #see what happens.
         self.vtk_overlay_window.set_camera_state({"ClippingRange": [10, 800]})
         self.vtk_overlay_window.set_video_image(image)
+        self.vtk_overlay_window.Initialize() # Allows the interactor to initialize itself.
+        self.vtk_overlay_window.Start()  # Start the event loop.
         self.vtk_overlay_window.Render()
 
     def _aruco_detect_and_follow(self, image):
@@ -104,4 +109,4 @@ if __name__ == '__main__':
     viewer.show()
     viewer.start()
 
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

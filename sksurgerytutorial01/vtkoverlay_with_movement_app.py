@@ -1,10 +1,13 @@
-# coding=utf-8
+"""
+Script to create a viewer window with a moving surface
+model overlaid in a live video feed
 
-"""Script to create a viewer window with a moving surface
-model overlaid in a live video feed"""
+USAGE:
+python vtkoverlay_with_movement_app.py
+"""
 
 import sys
-from PySide2.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 from sksurgeryutils.common_overlay_apps import OverlayBaseWidget
 
 class OverlayApp(OverlayBaseWidget):
@@ -20,6 +23,8 @@ class OverlayApp(OverlayBaseWidget):
         self._move_model()
 
         self.vtk_overlay_window.set_video_image(image)
+        self.vtk_overlay_window.Initialize() # Allows the interactor to initialize itself.
+        self.vtk_overlay_window.Start()  # Start the event loop.
         self.vtk_overlay_window.Render()
 
     def _move_model(self):
@@ -48,4 +53,4 @@ if __name__ == '__main__':
     viewer.show()
     viewer.start()
 
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

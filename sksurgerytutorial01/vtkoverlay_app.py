@@ -1,10 +1,13 @@
-# coding=utf-8
+"""
+Script to create a viewer window with a static surface 
+model overlaid in a live video feed
 
-"""Script to create a viewer window with a static surface
-model overlaid in a live video feed"""
+USAGE:
+python vtkoverlay_app.py
+"""
 
 import sys
-from PySide2.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 from sksurgeryutils.common_overlay_apps import OverlayBaseWidget
 
 #create an OverlayApp class, that inherits from OverlayBaseApp
@@ -16,6 +19,8 @@ class OverlayApp(OverlayBaseWidget):
         and render"""
         _, image = self.video_source.read()
         self.vtk_overlay_window.set_video_image(image)
+        self.vtk_overlay_window.Initialize() # Allows the interactor to initialize itself.
+        self.vtk_overlay_window.Start()  # Start the event loop.
         self.vtk_overlay_window.Render()
 
 #the following line prevents the code below from running unless
@@ -43,4 +48,4 @@ if __name__ == '__main__':
     viewer.start()
 
     #start the application
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
