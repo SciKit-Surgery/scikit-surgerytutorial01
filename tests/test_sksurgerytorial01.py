@@ -1,6 +1,9 @@
-# coding=utf-8
+"""
+sksurgerytutorial01 vtkoverlay tests
 
-"""sksurgerytutorial01 vtkoverlay tests"""
+USAGE:
+python -m pytest -v -s tests
+"""
 
 import pytest
 

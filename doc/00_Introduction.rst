@@ -42,62 +42,23 @@ guide the user in creating an augmented reality application in around 70 lines o
 
 Installation
 ~~~~~~~~~~~~
-Step 1:
-You'll need SciKit-SurgeryUtils installed on your system. Provided you have Python installed on 
-your system you should be able to run ...
-::
- 
-  pip install scikit-surgeryutils
 
-to install SciKit-SurgeryUtils and its dependencies (including SciKit-SurgeryCore).
-For the third part of the tutorial you'll also need SciKit-SurgeryArUcoTracker
+Packages, other requirements, and virtual environments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-::
-
-  pip install scikit-surgeryarucotracker
-
-If you don't have Python installed, we 
-recommend downloading an installer for your platform directly from `python.org`_.
-
-Virtual environments
+Python virtual environments
 ~~~~~~~~~~~~
 Virtualenv, venv, conda or pyenv can be used to create virtual environments to manage python packages.
-You can use conda env by installing conda for your OS (`conda_installation`_) and use the following yml file with all dependencies.
+If you don't have Python installed, we recommend downloading an installer for your platform directly from `python.org`_.
+For the case of conda, please create a VE using the following commands in your terminal:
+
 ::
-   ## Create scikit-surgerytutorial01VE.yml in your favorite location with the following content:
-   ##
-   ##  scikit-surgerytutorial01VE.yml
-   ##
-   ## Some useful commands to manage your conda env:
-   ## LIST CONDA ENVS: conda list -n *VE # show list of installed packages
-   ## UPDATE CONDA: conda update -n base -c defaults conda
-   ## INSTALL CONDA EV: conda env create -f *VE.yml
-   ## UPDATE CONDA ENV: conda env update --file *VE.yml --prune
-   ## ACTIVATE CONDA ENV: conda activate *VE
-   ## REMOVE CONDA ENV: conda remove -n *VE --all
 
-   name: scikit-surgerytutorial01VE
-   channels:
-     - defaults
-     - conda-forge #vtk; tox;
-     - anaconda #coverage; scipy;
-   dependencies:
-     - python=3.7
-     - numpy>=1.17.4
-     - vtk=8.1.2
-     - tox>=3.26.0
-     - pytest>=7.1.2
-     - pylint>=2.14.5
-     - pip>=22.2.2
-     - pip:
-        - PySide2>=5.14.2.3
-        - scikit-surgerycore>=0.1.7
-        - scikit-surgeryutils>=1.2.0
-        - scikit-surgeryarucotracker>=0.1.1
-        - opencv-python-headless
+   conda update -n base -c defaults conda
+   conda create -n sst01VE python=3.8 pip -c conda-forge #try3.7
+   conda activate sst01VE
+   pip install -r requirements.txt
 
-Step 2: 
-You should now be able to follow the tutorial, using the code snippets contained herein.
 
 .. _`python.org`: https://www.python.org/downloads/
 .. _`SmartLiver`: https://link.springer.com/article/10.1007/s11548-018-1761-3
