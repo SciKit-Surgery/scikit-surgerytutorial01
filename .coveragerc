@@ -1,4 +1,4 @@
 [run]
 omit = 
-        ./snappytutorial01/_version.py
-        ./snappytutorial01/__init__.py
+        ./sksurgerytutorial01/_version.py
+        ./sksurgerytutorial01/__init__.py

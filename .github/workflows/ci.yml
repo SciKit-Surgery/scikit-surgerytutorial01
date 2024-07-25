@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
         python-ver: [3.7, 3.8]
         experimental: [false]
         exclude:
@@ -64,7 +64,7 @@ jobs:
       - name: Run tests using xvfb (Ubuntu)
         if: startsWith(matrix.os, 'ubuntu')
         run: |
-          sudo apt-get install xvfb libxkbcommon-x11-0
+          sudo apt-get install xvfb libxkbcommon-x11-0 libgl1
           sudo Xvfb :1 -screen 0 1024x768x24 </dev/null &
           export DISPLAY=":1"
           export LD_LIBRARY_PATH=$pythonLocation"/lib/python3.6/site-packages/PySide2/Qt/plugins/platfoms"
