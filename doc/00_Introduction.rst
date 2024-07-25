@@ -58,7 +58,6 @@ For the case of conda, please create a VE using the following commands in your t
    conda create -n sst01VE python=3.8 pip -c conda-forge #try3.7
    conda activate sst01VE
    pip install -r requirements.txt
-   pip install -r requirements-dev.txt
 
 
 .. _`python.org`: https://www.python.org/downloads/
