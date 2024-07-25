@@ -23,7 +23,8 @@ class OverlayApp(OverlayBaseWidget):
         self._move_model()
 
         self.vtk_overlay_window.set_video_image(image)
-        self.vtk_overlay_window.Initialize() # Allows the interactor to initialize itself.
+        # Allows the interactor to initialize itself.
+        self.vtk_overlay_window.Initialize()
         self.vtk_overlay_window.Start()  # Start the event loop.
         self.vtk_overlay_window.Render()
 
@@ -44,11 +45,11 @@ class OverlayApp(OverlayBaseWidget):
 if __name__ == '__main__':
     app = QApplication([])
 
-    video_source = 0
-    viewer = OverlayApp(video_source)
+    VIDEO_SOURCE = 0
+    viewer = OverlayApp(VIDEO_SOURCE)
 
-    model_dir = '../models'
-    viewer.add_vtk_models_from_dir(model_dir)
+    MODEL_DIR = '../models'
+    viewer.add_vtk_models_from_dir(MODEL_DIR)
 
     viewer.show()
     viewer.start()

@@ -19,7 +19,8 @@ class OverlayApp(OverlayBaseWidget):
         and render"""
         _, image = self.video_source.read()
         self.vtk_overlay_window.set_video_image(image)
-        self.vtk_overlay_window.Initialize() # Allows the interactor to initialize itself.
+        # Allows the interactor to initialize itself.
+        self.vtk_overlay_window.Initialize()
         self.vtk_overlay_window.Start()  # Start the event loop.
         self.vtk_overlay_window.Render()
 
@@ -34,14 +35,14 @@ if __name__ == '__main__':
     #is set when we create the instance. This is an index
     #starting at 0. If you have more than one webcam, you can
     #try using different numbered sources
-    video_source = 0
-    viewer = OverlayApp(video_source)
+    VIDEO_SOURCE = 0
+    viewer = OverlayApp(VIDEO_SOURCE)
 
     #Set a model directory containing the models you wish
     #to render and optionally a colours.txt defining the
     #colours to render in.
-    model_dir = '../models'
-    viewer.add_vtk_models_from_dir(model_dir)
+    MODEL_DIR = '../models'
+    viewer.add_vtk_models_from_dir(MODEL_DIR)
 
     #start the viewer
     viewer.show()
